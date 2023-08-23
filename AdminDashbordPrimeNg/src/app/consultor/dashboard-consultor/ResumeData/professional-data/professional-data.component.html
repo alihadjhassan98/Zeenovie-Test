@@ -1,0 +1,522 @@
+<p-toast></p-toast>
+<!-- Row -->
+<div class="row">
+    <!-- Dashboard Box -->
+    <div class="col-xl-12">
+        <div class="dashboard-box margin-top-0">
+            <!-- Headline -->
+            <div class="headline mt-5">
+                <div class="d-flex bd-highlight">
+                    <div class="p-2 flex-grow-1 bd-highlight">
+
+
+                        <h2><i></i><b>My Professional Data</b></h2>
+
+                    </div>
+                    <!-- <div class="p-2 bd-highlight">
+                        <button pButton pRipple type="button"
+                            class="p-button-rounded p-button-info p-button-outlined icon-line-awesome-pencil"
+                            (click)="confirm($event)"> <span>delete</span></button>
+                    </div> -->
+
+                    <div class="p-2 bd-highlight">
+                        <button pButton pRipple type="button"
+                            class="p-button-rounded  p-button-outlined icon-line-awesome-pencil"
+                            (click)="showModalDialogUpdate()" *ngIf="professionaldata; else createButton" #updateButton>
+                            <span></span></button>
+                    </div>
+
+
+                    <div class="p-2 bd-highlight">
+                        <ng-template #createButton>
+                            <button pButton pRipple type="button"
+                                class="p-button-rounded  p-button-outlined icon-line-awesome-plus"
+                                (click)="showModalDialogCReate()"><span> </span> </button>
+                        </ng-template>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="content padding-bottom-0">
+                    <div *ngIf=" !professionaldata; else show">
+                        <div class="card">
+                            <div class="card-body mt-1">
+                                <p-messages [(value)]="messages" [enableService]="false"
+                                    [closable]="false"></p-messages>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ng-template #show>
+                            <div *ngIf="professionaldata" class="col-md-10">
+                                <div class="filed"><b>Professional Title : </b>{{professionaldata.Title}}</div>
+                                <div class="filed"><b>Level Of Education : </b> {{ professionaldata.LevelOfEducation}}
+                                </div>
+                                <div class="filed"><b>Level Of Experience : </b>{{ professionaldata.LevelOfExperience}}
+                                </div>
+                                <div class="filed"><b>CurrentNetSalary : </b>{{ professionaldata.LevelOfExperience}}
+                                </div>
+                                <div class="filed"><b>ProfessionalSituation : </b>{{
+                                    professionaldata.ProfessionalSituation}}</div>
+                                <div class="filed"><b>DesiredMinimumNetSalary : </b> {{
+                                    professionaldata.DesiredMinimumNetSalary}} DT</div>
+                                <div class="filed"><b>DesiredMinimumNetSalary : </b> {{
+                                    professionaldata.CurrentNetSalary}} DT</div>
+                                <div class="filed"><b>Availability : </b> {{ professionaldata.Availability}}</div>
+                                <div class="filed"><b>job category : </b>{{ professionaldata.JobCategorie}}</div>
+                                <div class="filed"><b>Types Of Positions : </b> {{ professionaldata.TypesOfPositions}}
+                                </div>
+                        
+                                    <div class="filed"><b>Country :</b> {{professionaldata.Address}}</div>
+                                    <div class="filed"><b>Region :</b> {{professionaldata.Region}}</div>
+                                    <div class="filed"><b>City :</b> {{professionaldata.City}}</div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-dialog class='custom-close-button' [(visible)]="displayModal" [modal]="true"
+     [style]="{height :'38vw',width:'50vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
+        [closable]="false">
+        <ng-template pTemplate="header">
+            <div class="p-dialog-title">Add Professional Data</div>
+        </ng-template>
+        <!--  put ur update formsgroup here  conetent here   -->
+        <div class="container">
+          
+                <!-- begin card-->
+           
+                    <form [formGroup]="newprofessionalDataForm">
+                        <div class="row">
+                            <!-- Title -->
+                            <div class="col">
+                                <label for="Title">Title</label>
+                                <input id="Title" type="text" formControlName="Title" pInputText
+                                    [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('Title')}" />
+                                <div *ngIf="isFieldInvalid('Title')" class="p-error"><span>
+                                        Title is required.</span></div>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="row ">
+                            <!-- Level of Education -->
+                            <div class="col-md-4 ">
+                                <label for="levelOfEducation">Level of Education</label>
+                                <p-dropdown id="levelOfEducation" formControlName="LevelOfEducation"
+                                [style]="{ 'width': '100%'}"
+                                    [options]="educationLevels" optionLabel="name" optionValue="name"
+                                    [ngClass]="{'ng-invalid ng-dirty': isFieldInvalidUpdate('LevelOfEducation')}"></p-dropdown>
+                                <div *ngIf="isFieldInvalidUpdate('LevelOfEducation')" class="p-error"><span>Level
+                                        of
+                                        Education is required.</span></div>
+
+                            </div>
+                            <!-- Level of Experience -->
+                            <div class="col-md-4 ">
+                                <label for="levelOfExperience">Level of Experience</label>
+                                <p-dropdown id="levelOfExperience" formControlName="LevelOfExperience"
+                                    [options]="experienceLevels"  [style]="{ 'width': '100%'}"
+                                    [ngClass]="{'ng-invalid ng-dirty': isFieldInvalidUpdate('LevelOfExperience')}"
+                                    optionLabel="name" optionValue="name"></p-dropdown>
+                                <div *ngIf="isFieldInvalidUpdate('LevelOfExperience')" class="p-error"><span>Level
+                                        of
+                                        Education is required.</span></div>
+                            </div>
+
+                            <!-- Availability -->
+                            <div class="col-md-4">
+                                <label for="availability">Availability</label>
+                                <p-dropdown id="availability" formControlName="Availability"   [style]="{ 'width': '100%'}" [options]="availabilities"
+                                    optionLabel="name" optionValue="name"
+                                    [ngClass]="{'ng-invalid ng-dirty': isFieldInvalidUpdate('Availability')}"></p-dropdown>
+                                <div *ngIf="isFieldInvalidUpdate('Availability')" class="p-error">
+                                    <span>Availability is required </span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row justify-content-between pt-5">
+                            <!-- Professional Situation -->
+                            <div class="col-md-4">
+                                <label for="professionalSituation">Professional Situation</label>
+                                <p-dropdown    [style]="{ 'width': '100%'}" id="professionalSituation" formControlName="ProfessionalSituation"
+                                    [options]="professionalSituations" optionLabel="name" optionValue="name"
+                                    [ngClass]="{'ng-invalid ng-dirty': isFieldInvalidUpdate('ProfessionalSituation')}"></p-dropdown>
+                                <div *ngIf="isFieldInvalidUpdate('ProfessionalSituation')" class="p-error">
+                                    <span>ProfessionalSituation is required </span>
+                                </div>
+                            </div>
+                            <!-- Current Net Salary -->
+                            <div class="col-md-4">
+                                <label for="currentNetSalary">Current Net Salary</label>
+                                <p-inputNumber  [size]="70"   [style]="{ 'width': '100%'}"formControlName="CurrentNetSalary" [showButtons]="true"
+                                    buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal"
+                                    [step]="100.000" decrementButtonClass="p-button-info"
+                                    [ngClass]="{'ng-invalid ng-dirty': isFieldInvalidUpdate('currentNetSalary')}"
+                                    incrementButtonClass="p-button-info" incrementButtonIcon="pi pi-plus"
+                                    decrementButtonIcon="pi pi-minus" [min]="420" mode="currency" currency="TND">
+                                </p-inputNumber>
+                                <div *ngIf="isFieldInvalidUpdate('CurrentNetSalary')" class="p-error">
+                                    <span>CurrentNetSalary is required </span>
+                                </div>
+
+
+                            </div>
+
+                            <!-- Desired Minimum Net Salary-->
+                            <div class="col-md-4">
+                                <label for="DesiredMinimumNetSalary">Desired Minimum Net Salary</label>
+                                <p-inputNumber   [size]="70"  [style]="{ 'width': '100%'}" formControlName="DesiredMinimumNetSalary"  width=" 100" [showButtons]="true"
+                                    buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal"
+                                    [step]="100.000" decrementButtonClass="p-button-info"
+                                    [ngClass]="{'ng-invalid ng-dirty': isFieldInvalidUpdate('DesiredMinimumNetSalary')}"
+                                    incrementButtonClass="p-button-info" incrementButtonIcon="pi pi-plus"
+                                    decrementButtonIcon="pi pi-minus" [min]="420" mode="currency" currency="TND">
+                                </p-inputNumber>
+                                <div *ngIf="isFieldInvalidUpdate('DesiredMinimumNetSalary')" class="p-error">
+                                    <span>DesiredMinimumNetSalary is required </span>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="row mt-5">
+                            <!-- Desired Work Locations -->
+                            <div class="col-md-4">
+                              <div class="p-field-select">
+                                <label for="country" class="required">Country</label>
+                                <select id="country" name="country" formControlName="Address"
+                                  [ngClass]="{'ng-invalid ng-dirty': isFieldInvalidUpdate('Address')}"
+                                  (change)="onSelectCountry()">
+                                  <option value="">Select a country</option>
+                                  <option *ngFor="let country of keys(countries)" [value]="country">{{country}}</option>
+                                </select>
+                              </div>
+                              <div *ngIf="isFieldInvalidUpdate('Address')" class="p-error"><span>
+                                Title is required.</span></div>
+                            </div>
+                          
+                            <div class="col-md-4">
+                              <div class="p-field-select">
+                                <label for="region" class="required">Region</label>
+                                <ng-container *ngIf="newprofessionalDataForm.get('Address')?.value === 'Tunisia'">
+                                  <select   [ngClass]="{'ng-invalid ng-dirty': isFieldInvalidUpdate('Region')}" id="region" name="region" formControlName="Region">
+                                    <option value="">Select a region</option>
+                                    <option *ngFor="let region of keys(countries[newprofessionalDataForm.get('Address')?.value] || {})" [value]="region">
+
+                                      {{region}}
+                                    </option>
+                                  </select>
+                                </ng-container>
+                                <ng-container *ngIf="newprofessionalDataForm.get('Address')?.value !== 'Tunisia'">
+                                  <input    [ngClass]="{'ng-invalid ng-dirty': isFieldInvalidUpdate('Region')}" id="region" name="region" formControlName="Region" placeholder="Enter region" />
+                                </ng-container>
+                              </div>
+                              <div *ngIf="isFieldInvalidUpdate('Region')" class="p-error"><span>
+                                Title is required.</span></div>
+                            </div>
+                          
+                            <div class="col-md-4">
+                              <div class="p-field-select">
+                                <label for="city" class="required">City</label>
+                                <ng-container *ngIf="newprofessionalDataForm.get('Address')?.value === 'Tunisia' && newprofessionalDataForm.get('Region')?.value">
+                                  <select        [ngClass]="{'ng-invalid ng-dirty': isFieldInvalidUpdate('City')}" id="city" name="city" formControlName="City">
+                                    <option value="">Select a city</option>
+                                    <option *ngFor="let city of getCities(newprofessionalDataForm.get('Address')?.value, newprofessionalDataForm.get('Region')?.value)" [value]="city">
+                                      {{city}}
+                                    </option>
+                                  </select>
+                                </ng-container>
+                                <ng-container *ngIf="newprofessionalDataForm.get('Address')?.value !== 'Tunisia' || !newprofessionalDataForm.get('Region')?.value">
+                                  <input         [ngClass]="{'ng-invalid ng-dirty': isFieldInvalidUpdate('City')}" id="city" name="city" formControlName="City" placeholder="Enter city" />
+                                </ng-container>
+                              </div>
+                            </div>
+                            <div *ngIf="isFieldInvalidUpdate('City')" class="p-error"><span>
+                                City is required.</span></div>
+                          </div>
+
+                    
+                    
+                          
+
+                        <div class="row  pt-5">
+                            <div class="col-md-6">
+                                <label>JobCategorie groups</label>
+                                <p-multiSelect [style]="{ 'width': '100%'}"  formControlName="JobCategorie"   width="100%"[options]="JobCategorie" [group]="true"
+                                  defaultLabel="Select a JobCategorie" scrollHeight="250px" display="chip"
+                                  [ngClass]="{'ng-invalid ng-dirty': isFieldInvalidUpdate('JobCategorie')}">
+                                  <ng-template let-group pTemplate="group">
+                                    <div class="flex align-items-center">
+                                      <span>{{group.label}}</span>
+                                    </div>
+                                  </ng-template>
+                                  <ng-template let-item pTemplate="item">
+                                    <div class="flex align-items-center">
+                                      <span>{{item.label}}</span>
+                                    </div>
+                                  </ng-template>
+                                </p-multiSelect>
+                                <div *ngIf="isFieldInvalidUpdate('JobCategorie')" class="p-error">
+                                  <span>JobCategorie is required </span>
+                                </div>
+                              </div>
+                              
+                              
+                            <!-- Types of Positions -->
+                            <div class="col-md-6">
+                                <label for="typesOfPositions">Types of Positions</label>
+                                <p-dropdown   [style]="{ 'width': '100%'}" id="typesOfPositions" formControlName="TypesOfPositions"
+                                    [ngClass]="{'ng-invalid ng-dirty': isFieldInvalidUpdate('TypesOfPositions')}"
+                                    [options]="typesOfPositions" optionLabel="name" optionValue="name"> </p-dropdown>
+                                <div *ngIf="isFieldInvalidUpdate('TypesOfPositions')" class="p-error">
+                                    <span>TypesOfPositions is required </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+          
+                <!--end of card -->
+  
+        </div>
+
+        <!--  put ur conetent here   -->
+
+
+        <!--end of card -->
+
+        <ng-template pTemplate="footer">
+            <button pButton pRipple icon="pi pi-times" (click)="closeModal()" label="No"
+                class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+            <button pButton pRipple icon="pi pi-check" (click)="onSubmitUpdate()" label="Save"
+                class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+        </ng-template>
+    </p-dialog>
+    <p-dialog header="Are you sure you want to close this window?" [(visible)]="displayPosition" [modal]="true"
+        [style]="{width: '20vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <p> Your changes will be lost if you leave without saving.</p>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple icon="pi pi-times" (click)="displayPosition=false" label="No"
+                class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+            <button pButton pRipple icon="pi pi-check" (click)="closeAllModals()" label="Yes"
+                class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+        </ng-template>
+    </p-dialog>
+    <!-- crate new dialoge for post request ? -->
+    <p-dialog class='custom-close-button' [(visible)]="displayModalcreate" [modal]="true"
+    [style]="{height :'38vw',width:'50vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
+        [closable]="false">
+
+        <!--  put ur conetent here   -->
+        <div class="container">
+          
+            <!-- begin card-->
+       
+                <form [formGroup]="professionalDataForm">
+                    <div class="row">
+                        <!-- Title -->
+                        <div class="col">
+                            <label for="Title">Title</label>
+                            <input id="Title" type="text" formControlName="Title" pInputText
+                                [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('Title')}" />
+                            <div *ngIf="isFieldInvalid('Title')" class="p-error"><span>
+                                    Title is required.</span></div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="row ">
+                        <!-- Level of Education -->
+                        <div class="col-md-4 ">
+                            <label for="levelOfEducation">Level of Education</label>
+                            <p-dropdown id="levelOfEducation" formControlName="LevelOfEducation"
+                            [style]="{ 'width': '100%'}"
+                                [options]="educationLevels" optionLabel="name" optionValue="name"
+                                [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('LevelOfEducation')}"></p-dropdown>
+                            <div *ngIf="isFieldInvalid('LevelOfEducation')" class="p-error"><span>Level
+                                    of
+                                    Education is required.</span></div>
+
+                        </div>
+                        <!-- Level of Experience -->
+                        <div class="col-md-4 ">
+                            <label for="levelOfExperience">Level of Experience</label>
+                            <p-dropdown id="levelOfExperience" formControlName="LevelOfExperience"
+                                [options]="experienceLevels"  [style]="{ 'width': '100%'}"
+                                [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('LevelOfExperience')}"
+                                optionLabel="name" optionValue="name"></p-dropdown>
+                            <div *ngIf="isFieldInvalid('LevelOfExperience')" class="p-error"><span>Level
+                                    of
+                                    Education is required.</span></div>
+                        </div>
+
+                        <!-- Availability -->
+                        <div class="col-md-4">
+                            <label for="availability">Availability</label>
+                            <p-dropdown id="availability" formControlName="Availability"   [style]="{ 'width': '100%'}" [options]="availabilities"
+                                optionLabel="name" optionValue="name"
+                                [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('Availability')}"></p-dropdown>
+                            <div *ngIf="isFieldInvalid('Availability')" class="p-error">
+                                <span>Availability is required </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row justify-content-between pt-5">
+                        <!-- Professional Situation -->
+                        <div class="col-md-4">
+                            <label for="professionalSituation">Professional Situation</label>
+                            <p-dropdown    [style]="{ 'width': '100%'}" id="professionalSituation" formControlName="ProfessionalSituation"
+                                [options]="professionalSituations" optionLabel="name" optionValue="name"
+                                [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('ProfessionalSituation')}"></p-dropdown>
+                            <div *ngIf="isFieldInvalid('ProfessionalSituation')" class="p-error">
+                                <span>ProfessionalSituation is required </span>
+                            </div>
+                        </div>
+                        <!-- Current Net Salary -->
+                        <div class="col-md-4">
+                            <label for="currentNetSalary">Current Net Salary</label>
+                            <p-inputNumber  [size]="70"   [style]="{ 'width': '100%'}"formControlName="CurrentNetSalary" [showButtons]="true"
+                                buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal"
+                                [step]="100.000" decrementButtonClass="p-button-info"
+                                [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('currentNetSalary')}"
+                                incrementButtonClass="p-button-info" incrementButtonIcon="pi pi-plus"
+                                decrementButtonIcon="pi pi-minus" [min]="420" mode="currency" currency="TND">
+                            </p-inputNumber>
+                            <div *ngIf="isFieldInvalid('CurrentNetSalary')" class="p-error">
+                                <span>CurrentNetSalary is required </span>
+                            </div>
+
+
+                        </div>
+
+                        <!-- Desired Minimum Net Salary-->
+                        <div class="col-md-4">
+                            <label for="DesiredMinimumNetSalary">Desired Minimum Net Salary</label>
+                            <p-inputNumber   [size]="70"  [style]="{ 'width': '100%'}" formControlName="DesiredMinimumNetSalary"  width=" 100" [showButtons]="true"
+                                buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal"
+                                [step]="100.000" decrementButtonClass="p-button-info"
+                                [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('DesiredMinimumNetSalary')}"
+                                incrementButtonClass="p-button-info" incrementButtonIcon="pi pi-plus"
+                                decrementButtonIcon="pi pi-minus" [min]="420" mode="currency" currency="TND">
+                            </p-inputNumber>
+                            <div *ngIf="isFieldInvalid('DesiredMinimumNetSalary')" class="p-error">
+                                <span>DesiredMinimumNetSalary is required </span>
+                            </div>
+                        </div> 
+                    </div>
+                        <div class="row mt-5">
+                            <!-- Desired Work Locations -->
+                            <div class="col-md-4">
+                              <div class="p-field-select">
+                                <label for="country" class="required">Country</label>
+                                <select id="country" name="country" formControlName="Address"
+                                  [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('Address')}"
+                                  (change)="onSelectCountry()">
+                                  <option value="">Select a country</option>
+                                  <option *ngFor="let country of keys(countries)" [value]="country">{{country}}</option>
+                                </select>
+                              </div>
+                              <div *ngIf="isFieldInvalid('Address')" class="p-error"><span>
+                                Title is required.</span></div>
+                            </div>
+                          
+                            <div class="col-md-4">
+                              <div class="p-field-select">
+                                <label for="region" class="required">Region</label>
+                                <ng-container *ngIf="professionalDataForm.get('Address')?.value === 'Tunisia'">
+                                  <select   [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('Region')}" id="region" name="region" formControlName="Region">
+                                    <option value="">Select a region</option>
+                                    <option *ngFor="let region of keys(countries[professionalDataForm.get('Address')?.value] || {})" [value]="region">
+
+                                      {{region}}
+                                    </option>
+                                  </select>
+                                </ng-container>
+                                <ng-container *ngIf="professionalDataForm.get('Address')?.value !== 'Tunisia'">
+                                  <input    [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('Region')}" id="region" name="region" formControlName="Region" placeholder="Enter region" />
+                                </ng-container>
+                              </div>
+                              <div *ngIf="isFieldInvalid('Region')" class="p-error"><span>
+                                Title is required.</span></div>
+                            </div>
+                          
+                            <div class="col-md-4">
+                              <div class="p-field-select">
+                                <label for="city" class="required">City</label>
+                                <ng-container *ngIf="professionalDataForm.get('Address')?.value === 'Tunisia' && professionalDataForm.get('Region')?.value">
+                                  <select        [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('City')}" id="city" name="city" formControlName="City">
+                                    <option value="">Select a city</option>
+                                    <option *ngFor="let city of getCities(professionalDataForm.get('Address')?.value, professionalDataForm.get('Region')?.value)" [value]="city">
+                                      {{city}}
+                                    </option>
+                                  </select>
+                                </ng-container>
+                                <ng-container *ngIf="professionalDataForm.get('Address')?.value !== 'Tunisia' || !professionalDataForm.get('Region')?.value">
+                                  <input         [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('City')}" id="city" name="city" formControlName="City" placeholder="Enter city" />
+                                </ng-container>
+                              </div>
+                            </div>
+                            <div *ngIf="isFieldInvalid('City')" class="p-error"><span>
+                                City is required.</span></div>
+                          </div>
+                      
+
+                    <div class="row  pt-5">
+                        <div class="col-md-6">
+                            <label>JobCategorie groups</label>
+                            <p-multiSelect [style]="{ 'width': '100%'}"  formControlName="JobCategorie"   width="100%"[options]="JobCategorie" [group]="true"
+                              defaultLabel="Select a JobCategorie" scrollHeight="250px" display="chip"
+                              [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('JobCategorie')}">
+                              <ng-template let-group pTemplate="group">
+                                <div class="flex align-items-center">
+                                  <span>{{group.label}}</span>
+                                </div>
+                              </ng-template>
+                              <ng-template let-item pTemplate="item">
+                                <div class="flex align-items-center">
+                                  <span>{{item.label}}</span>
+                                </div>
+                              </ng-template>
+                            </p-multiSelect>
+                            <div *ngIf="isFieldInvalid('JobCategorie')" class="p-error">
+                              <span>JobCategorie is required </span>
+                            </div>
+                          </div>
+                          
+                          
+                        <!-- Types of Positions -->
+                        <div class="col-md-6">
+                            <label for="typesOfPositions">Types of Positions</label>
+                            <p-dropdown   [style]="{ 'width': '100%'}" id="typesOfPositions" formControlName="TypesOfPositions"
+                                [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('TypesOfPositions')}"
+                                [options]="typesOfPositions" optionLabel="name" optionValue="name"> </p-dropdown>
+                            <div *ngIf="isFieldInvalid('TypesOfPositions')" class="p-error">
+                                <span>TypesOfPositions is required </span>
+                            </div>
+                        </div>
+             
+                    </div>
+                </form>
+      
+            <!--end of card -->
+
+    </div>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple icon="pi pi-times" (click)="closeModal()" label="No"
+                class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+            <button pButton pRipple icon="pi pi-check" (click)="onSubmit()" label="Save"
+                class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+        </ng-template>
+    </p-dialog>
+
+    <!-- <p-confirmPopup></p-confirmPopup> -->

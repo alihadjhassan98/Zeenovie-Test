@@ -1,0 +1,71 @@
+
+<div class="container ">
+
+
+    <div class="" data-simplebar>
+        <div class="full-page-content-inner">
+
+            <h3 class="page-title">Search Results</h3>
+
+     
+
+    <div class="listings-container  margin-top-35">
+
+    	<div *ngFor="let offer of offers">
+            <a class="job-listing" *ngIf="offer.isAccepted" [routerLink]="['/home/home-job-offer-details', offer._id]" >
+                <!-- Job Listing Details -->
+                <div class="job-listing-details">
+                    <!-- Logo -->
+                    <div *ngIf="entrepriseData[offer.IdUser]" class="job-listing-company-logo">
+                        <img [src]="('data:image/png;base64,' + entrepriseData[offer.IdUser].image.data)" alt="" />
+                    </div>
+    
+                    <!-- Details -->
+                    <div class="job-listing-description">
+                        <h4 class="job-listing-company" *ngIf="entrepriseData1[offer.IdUser]">{{ entrepriseData1[offer.IdUser].nameE }}</h4>
+                        <h3 class="job-listing-title">{{ offer.titleO }}</h3>
+                    </div>
+                </div>
+    
+                <!-- Job Listing Footer -->
+                <div class="job-listing-footer">
+               
+                    <ul>
+                        <li><i class="icon-material-outline-location-on"></i> {{ offer.Address }}, {{ offer.Region }}, {{ offer.City }}</li>
+                        <li><i class="icon-material-outline-business-center"></i> {{ offer.TypesOfPositions.join(', ') }}</li>
+                        <li><i class="icon-material-outline-account-balance-wallet"></i> {{ offer.DesiredMinimumNetSalary }}</li>
+                        <li><i class="icon-material-outline-access-time"></i> {{ timeAgo(offer.date) }}</li>
+                    </ul>
+                </div>
+            </a>
+        </div>
+
+				<!-- Job Listing -->
+			
+
+     
+    </div>
+</div>
+
+               
+            
+
+
+            <!-- Pagination -->
+    
+            <div class="pagination-container margin-top-20 margin-bottom-20">
+                <nav class="pagination">
+                    <p-paginator [rows]="rows" [totalRecords]="totalRecords" (onPageChange)="paginate($event)" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
+                </nav>
+            </div>
+            <div class="clearfix"></div>
+            <!-- Pagination / End -->
+
+
+            <!-- Footer / End -->
+
+        </div>
+    </div>
+    <!-- Full Page Content / End -->
+
+

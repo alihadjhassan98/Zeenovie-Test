@@ -1,0 +1,109 @@
+<section>
+<div *ngIf="quizData">
+    <h2>Title: {{ quizData.title }}</h2>
+    <!--<p>{{ quizData.description }}</p>-->
+   
+    <div *ngIf="timeLeft > 0">Time Left: {{ formatTimeLeftM(timeLeft) }}:{{ formatTimeLeftS(timeLeft) }}</div>
+
+
+
+
+    <div class='content'>
+
+    <div>
+      <div *ngIf="currentQuestionIndex >= 0 && currentQuestionIndex < questions.length">
+      <h1>{{ questions[currentQuestionIndex].text }}</h1>
+      <div class="dpx">
+        <div class='px'>
+        
+        
+
+
+
+
+        
+        <div  *ngIf="questions[currentQuestionIndex].type === 'single-choice'">
+          <label *ngFor="let option of questions[currentQuestionIndex].options">
+            <input
+            class="option-input radio"
+            type="radio"
+            [name]="currentQuestionIndex"
+            [value]="option._id"
+            [checked]="getSelectedAnswer(option._id)"
+            (change)="selectAnswer(option._id)"
+          >
+
+          <div class="back-end box">
+            <span>{{ option.text }}</span>
+          </div>
+          
+            
+          </label>
+        </div>
+
+
+
+
+
+
+        <div *ngIf="questions[currentQuestionIndex].type === 'multiple-choice'">
+            <label *ngFor="let option of questions[currentQuestionIndex].options">
+                <input
+                class="option-input checkbox"
+                  type="checkbox"
+                  [name]="currentQuestionIndex"
+                  [value]="option._id"
+                  [checked]="isSelected(option._id)"
+                  (change)="toggleOption(option._id)"
+                >
+
+
+                <div class="back-end box">
+
+              {{ option.text }}
+
+            </div>
+
+            </label>
+          </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="button-group">
+
+
+      <button class="button button-sliding-icon ripple-effect" (click)="prevQuestion()" [disabled]="currentQuestionIndex === 0"><i class="icon-feather-arrow-left"></i>Previous</button>
+    <button class="button button-sliding-icon ripple-effect" (click)="nextQuestion()" [disabled]="currentQuestionIndex === questions.length - 1">Nextㅤ<i class="icon-feather-arrow-right"></i></button>
+    <button class="button button-sliding-icon gray ripple-effect" (click)="submitAnswers()">Submit Answers<i class="icon-material-outline-check"></i></button>
+
+    </div>
+  
+    
+
+
+    
+  
+
+
+  </div>
+</section>
+  

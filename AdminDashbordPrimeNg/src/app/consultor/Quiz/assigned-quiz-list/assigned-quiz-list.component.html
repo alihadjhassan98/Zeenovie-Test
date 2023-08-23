@@ -1,0 +1,47 @@
+
+<h2>Assigned Quizzes</h2>
+
+
+  <div *ngFor="let quiz of assignedQuizzes">
+  <!-- Tasks Container -->
+  <div class="tasks-list-container tasks-grid-layout margin-top-35">
+				
+    <!-- Task -->
+    <a  class="task-listing">
+
+      <!-- Job Listing Details -->
+      <div class="task-listing-details">
+
+        <!-- Details -->
+        <div class="task-listing-description">
+          <h3 class="task-listing-title">{{ quiz.title }}</h3>
+          <ul class="task-icons">
+            <li><i class="icon-material-outline-location-on"></i> {{ assignedToUsers[companyId]?.username }}</li>
+            <li><i class="icon-material-outline-access-time"></i> {{ quiz.timer }} minutes</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="task-listing-bid">
+        <div class="task-listing-bid-inner">
+          <div class="task-offers">
+            <strong>Description:</strong>
+            <span>{{ quiz.description }}</span>
+          </div>
+          
+          <span class="button button-sliding-icon ripple-effect" (click)="takeQuiz(quiz._id)" >Take Quiz <i class="icon-material-outline-arrow-right-alt"></i></span>
+        </div>
+      </div>
+
+      
+    </a>
+
+
+    
+  </div>
+
+</div>
+
+  <!-- Tasks Container / End -->
+  

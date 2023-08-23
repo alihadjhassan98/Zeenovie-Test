@@ -1,0 +1,30 @@
+.product-item {
+    .product-item-content {
+        border: 1px solid var(--surface-d);
+        border-radius: 3px;
+        margin: .3rem;
+        text-align: center;
+        padding: 2rem 0;
+    }
+
+    .product-image {
+        width: 50%;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    }
+}
+
+::ng-deep p-carousel{
+   margin-right: 400px !important; 
+}
+::ng-deep .p-carousel .p-carousel-content .p-carousel-next,
+::ng-deep .p-carousel .p-carousel-content .p-carousel-prev {
+  background-color: #1DA9B1 !important;
+  width: 40px !important; /* Adjust the width */
+  height: 40px !important; /* Adjust the height */
+}
+
+::ng-deep .p-carousel .p-carousel-content .p-carousel-next .pi,
+::ng-deep .p-carousel .p-carousel-content .p-carousel-prev .pi {
+  color: #ffffff !important;
+  font-size: 24px !important; /* Adjust the icon size */
+}

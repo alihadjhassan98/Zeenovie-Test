@@ -1,0 +1,34 @@
+.header-notifications-trigger a  {
+    cursor: pointer;
+  }
+.cur{
+    cursor: pointer; 
+}
+  
+
+.profile-pic {
+	height: 10%;
+	width: 10%;
+	transition: all .3s ease;
+	object-fit: cover;
+}
+
+.profile-pic:after {
+	font-family: Feather-Icons;
+	content: "\e9f1";
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	line-height: 120px;
+	position: absolute;
+	font-size: 60px;
+	background: #f0f0f0;
+	color: #aaa;
+	text-align: center;
+}
+
+
+.header-notifications-scroll {
+	max-height: 300px !important; /* Adjust this value according to your needs */
+  }

@@ -1,0 +1,114 @@
+<div class="section  gray  padding-top-65 padding-bottom-70 full-width-carousel-fix">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <!-- Section Headline -->
+                <div class="section-headline margin-top-0 ">
+                    <h3>Consultants</h3>
+                    <a routerLink="/home/full-page-consultants" class="headline-link">Browse All Consultants</a>
+                </div>
+            </div>
+        
+            <div   style=" margin-left: -4rem;" class="col-md-12 mt-5 ">
+                <!-- [responsiveOptions]="responsiveOptions" -->
+                <p-carousel [value]="consultants" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1"
+                    [circular]="false" [autoplayInterval]="2000" 
+                    [style]="{ 'width': '110%'}">
+                    <ng-template let-consultant pTemplate="item">
+
+                        <!-- <div *ngIf="!isLoading" class="freelancer">
+                         
+                            <p-skeleton shape="circle" size="64px" class="skeleton-avatar"></p-skeleton>
+                            
+                      
+                            <p-skeleton shape="rectangle" height="16px" width="80%" class="skeleton-name"></p-skeleton>
+                            
+                          
+                            <p-skeleton shape="rectangle" height="14px" width="60%" class="skeleton-title"></p-skeleton>
+                            
+                 
+                            <p-skeleton shape="rectangle" height="14px" width="30%" class="skeleton-rating"></p-skeleton>
+                            
+                          
+                            <p-skeleton shape="rectangle" height="14px" width="50%" class="skeleton-details"></p-skeleton>
+                            
+                          
+                            <p-skeleton shape="rectangle" height="14px" width="50%" class="skeleton-details"></p-skeleton>
+                            
+                            *ngIf="isLoading"
+                            <p-skeleton shape="rectangle" height="36px" width="100%" class="skeleton-button"></p-skeleton>
+                          </div>-->
+                          
+                          <!-- Show the card content when isLoading is false -->
+                          <div >
+                            <div  style=" border: 1px solid var(--surface-d); border-radius: 3px;
+                            margin: .3rem;
+                            padding: 0rem ;">
+                                <!-- Overview -->
+                                <div class="freelancer-overview product-item-content">
+                                    <div class="freelancer-overview-inner ">
+                                        <!-- Bookmark Icon -->
+
+                                        <!-- <ng-container >
+                                            <span class="bookmark-icon"></span>
+                                        </ng-container> -->
+                                        <!-- Avatar -->
+                                        <div class="freelancer-avatar">
+                                          
+                                            <a [routerLink]="['/home/single-consultant-details', consultant._id]">
+                                                <ng-container *ngIf="consultant.images.length > 0">
+                                                    <img [src]="'data:image/png;base64,' + consultant.images[0].data"
+                                                        alt="">
+                                                </ng-container>
+                                            </a>
+                                        </div>
+
+                                        <!-- Name -->
+                                        <div class="freelancer-name mb-1">
+                                            <h4><a href="#">{{ consultant.username }}</a></h4>
+                                            <span *ngIf="consultant.prodata.length > 0">{{ consultant.prodata[0].Title
+                                                }}</span>
+                                        </div>
+
+                                        <!-- Rating -->
+                                      <ng-container class="freelancer-rating " *ngIf="consultant.ratings.length > 0">
+                                        <p-rating [(ngModel)]="consultant.averageRating" [readonly]="true" [cancel]="false" ></p-rating>
+
+
+                                        </ng-container> 
+                                        
+                                    </div>
+                                </div>
+
+                                <!-- Details -->
+                                <div class="freelancer-details">
+                                    <!-- <div class="freelancer-details-list">
+                                        <ul>
+                                            <ng-container *ngIf="consultant.prodata.length > 0">
+                                                <li>
+                                                    Location <strong><i class="icon-material-outline-location-on"></i>
+                                                        {{ consultant.prodata[0].City }}, {{
+                                                        consultant.prodata[0].Region }}</strong>
+                                                </li>
+                                                <li>
+                                                    Rate <strong>{{ consultant.prodata[0].CurrentNetSalary }} /
+                                                        hr</strong>
+                                                </li>
+                                            </ng-container>
+                                            <li>Job Success <strong>95%</strong></li>
+                                        </ul>
+                                    </div> -->
+                                    <a [routerLink]="['/home/single-consultant-details', consultant._id]" style="width : 100%;"
+                                        class="button button-sliding-icon ripple-effect">View Profile <i
+                                            class="icon-material-outline-arrow-right-alt"></i></a>
+                                </div>
+
+                            </div>
+                          </div>
+                    
+                    </ng-template>
+                </p-carousel>
+            </div>
+        </div>
+    </div>
+</div>

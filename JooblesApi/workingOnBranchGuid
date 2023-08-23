@@ -1,0 +1,50 @@
+To push changes from Wissem's branch named wissem to the main branch, you can follow these steps:
+
+    First, fetch the latest changes from the main branch to ensure that your local copy is up to date:
+
+git:
+
+    git fetch origin main
+
+Switch to Wissem's branch named wissem:
+
+  git checkout wissem
+
+    Merge any changes from the main branch into Wissem's branch to resolve any conflicts that might exist:
+
+git :
+
+  git merge main
+
+    Push the changes from Wissem's branch to the main branch on the remote repository:
+
+finally:
+
+git push origin wissem:main
+
+This will push the changes from Wissem's branch named wissem to the main branch on the remote repository.
+Once the changes have been pushed, you can verify that they have been successfully merged into the main branch by checking the repository on GitHub or using the git log command on your local machine.
+
+
+//
+To create a new branch named "saadWork" and push your local changes to it, follow these steps:
+
+    Make sure you are on the main branch by running git checkout main.
+    Create a new branch using the command
+
+
+    Switch to the new branch by running git checkout saadWork.
+    Commit your changes using
+    
+git branch saadWorkbranch
+git add .
+git commit -m "commit message" 
+ git push -u origin saadWork.
+as you normally would.
+
+
+
+    Push your changes to the new branch using the command 
+   
+
+Your local changes will now be available on the "saadWork" branch on the remote repository.

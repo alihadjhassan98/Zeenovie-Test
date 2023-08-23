@@ -1,0 +1,148 @@
+
+<form [formGroup]="proexperienceForm" (ngSubmit)="onSubmit()">
+<p-dialog class='custom-close-button' [(visible)]="displayModal" [modal]="true" [style]="{height :'38vw',width:'50vw'}"
+    [baseZIndex]="10000" [draggable]="true" [resizable]="true" [closable]="false">
+    <ng-template pTemplate="header">
+        <div class="p-dialog-title">Add Work Experience</div>
+    </ng-template>
+    <div class="p-mb-5 mt-5">
+        <div class="grid mt-5">
+          <div class="container">
+            <div class="row">
+              <input name="id" hidden formControlName="_id" readonly>
+              <div class="col-md-4 d-flex mt-5 mr-1">
+                <p-inputSwitch styleClass="mr-1" formControlName="showPeriodEnd"></p-inputSwitch>
+                <label for="period">Do you have Current Job?</label>
+              </div>
+              <div class="col-md-4 ">
+                <label for="period">Period</label>
+                <input type="date" formControlName="Period" showTime="true" pInputText />
+              </div>
+              <div class="col-md-4" *ngIf="proexperienceForm.get('showPeriodEnd')?.value">
+                <label for="Until">Until</label>
+                <input type="date" id="Until" formControlName="Until" showTime="true" pInputText />
+            </div>
+              <div class="col-md-6">
+                <label for="JobTitle" class="required">Job Title</label>
+                <input type="text" id="JobTitle" formControlName="JobTitle" required pInputText />
+                <div *ngIf="isFieldInvalid('JobTitle')" class="p-error">
+                  <span>Job Title is required.</span>
+                </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <label for="JobType" class="required">Type of Degree</label>
+                <select id="JobType" formControlName="JobType" required>
+                  <option value="">Select a Type</option>
+                  <option value="CDI">CDI</option>
+                  <option value="CDD">CDD</option>
+                  <option value="SVIP">SVIP</option>
+                  <option value="Pfe/Internship">Pfe/Internship</option>
+                  <option value="Seasonal">Seasonal</option>
+                  <option value="Frelancer">Frelancer</option>
+                  <option value="Internship">Internship</option>
+                  <!-- add more options as needed -->
+                </select>
+                <div *ngIf="isFieldInvalid('JobType')" class="p-error">
+                  <span>Type of Degree is required.</span>
+                </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <label for="Employer" class="required">Employer</label>
+                <input type="text" id="Employer" formControlName="Employer" pInputText />
+                <div *ngIf="isFieldInvalid('Employer')" class="p-error">
+                  <span>Employer is required.</span>
+                </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <label for="Workplace">Workplace</label>
+                <select id="Workplace" formControlName="Workplace">
+                  <option value="Tunisia">Tunisia</option>
+                  <option value="Canada">Canada</option>
+                  <option value="UK">UK</option>
+                  <!-- add more options as needed -->
+                </select>
+                <div *ngIf="isFieldInvalid('Workplace')" class="p-error">
+                    <span>Workplace is required.</span>
+                  </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <label for="Industry">Industry</label>
+                <select id="Industry" formControlName="Industry">
+                  <option value="IT/telecom">IT / telecom</option>
+                  <option value="Import/Export">Import / Export</option>
+                  <option value="E-Commerce">E-Commerce</option>
+                  <!-- add more options as needed -->
+                </select>
+                <div *ngIf="isFieldInvalid('Industry')" class="p-error">
+                    <span>Industry is required.</span>
+                  </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <label for="CompanySize">Company Size</label>
+                <select id="CompanySize" formControlName="CompanySize">
+                  <option value="less than 20 Employer">less than 20 Employer</option>
+                  <option value="Between 20 and 100 Employer">Between 20 and 100 Employer</option>
+                  <option value="Between 100 and 200 Employer">Between 100 and 200 Employer</option>
+                  <option value="Between 200 and 500 Employer">Between 200 and 500 Employer</option>
+                  <option value="more than 500 Employer">more than 500 Employer</option>
+                  <!-- add more options as needed -->
+                </select>
+                <div *ngIf="isFieldInvalid('CompanySize')" class="p-error">
+                    <span>Company Size is required.</span>
+                  </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <label for="CompanyCategory">Company Category</label>
+                <select id="CompanyCategory" formControlName="CompanyCategory">
+                  <option value="Private">Private</option>
+                  <option value="Public">Public</option>
+                  <!-- add more options as needed -->
+                </select>
+                <div *ngIf="isFieldInvalid('CompanyCategory')" class="p-error">
+                    <span>Company Category is required.</span>
+                  </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <label for="MonthlyNetSalary">Monthly Net salary</label>
+                <select id="MonthlyNetSalary" formControlName="MonthlyNetSalary">
+                  <option value="less than 250">less than 250</option>
+                  <option value="Between 250 and 500">Between 250 and 500</option>
+                  <option value="Between 500 and 1000">Between 500 and 1000</option>
+                  <option value="Between 1000 and 2000">Between 1000 and 2000</option>
+                  <option value="more than 2500">more than 2500</option>
+                  <!-- add more options as needed -->
+                </select>
+
+              </div>
+              <div class="col-md-12 mt-3">
+                <label for="TasksAndMissions">Tasks and Missions</label>
+                <textarea id="TasksAndMissions" formControlName="TasksAndMissions"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      
+      
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple icon="pi pi-times" (click)="closeModal()" label="No"
+            class="p-button-outlined p-button-rounded p-button-danger blue-hover"></button>
+        <button type="submit" pButton pRipple icon="pi pi-check"
+         
+            label="Save" class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+    </ng-template>
+</p-dialog>
+<p-dialog header="Are you sure you want to close this window?" [(visible)]="displayPosition" [modal]="true"
+    [style]="{width: '20vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <p> Your changes will be lost if you leave without saving.</p>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple icon="pi pi-times" (click)="displayPosition=false" label="No"
+            class="p-button-outlined p-button-rounded p-button-danger blue-hover"></button>
+        <button pButton pRipple icon="pi pi-check" (click)="closeAllModals()" label="Yes"
+            class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+    </ng-template>
+</p-dialog>
+</form>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

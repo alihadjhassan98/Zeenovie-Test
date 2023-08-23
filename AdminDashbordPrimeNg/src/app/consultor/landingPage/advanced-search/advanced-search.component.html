@@ -1,0 +1,172 @@
+<p-toast></p-toast>
+<div class="dashboard-content-container" data-simplebar>
+    <div class="dashboard-content-inner">
+        <h2 class="mb-5 ml-5"><b>Advancd Search </b>
+        </h2>
+    <p-card>
+  
+        <form #offerDetailsForm="ngForm">
+    
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="LevelOfEducation" class="required">Level of Education</label>
+                        <select id="LevelOfEducation" name="LevelOfEducation"
+                            [(ngModel)]="offer.LevelOfEducation">
+                            <option value="Primary">Primary</option>
+                            <option value="Secondary">Secondary</option>
+                            <option value="Professional training">Professional training</option>
+                            <option value="Bac">Bac</option>
+                            <option value="Bac +3">Bac +3</option>
+                            <option value="Bac +5">Bac +5</option>
+                            <option value="PhD">PHD</option>
+                            <option value="Expert, Research">Expert, Research</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="LevelOfExperience" class="required">Level of Experience</label>
+                        <select id="LevelOfExperience" name="LevelOfExperience"
+                            [(ngModel)]="offer.LevelOfExperience">
+                            <option value="No experience">No experience</option>
+                            <option value="Less than a year">Less than a year</option>
+                            <option value="Between 1 and 2 years">Between 1 and 2 years</option>
+                            <option value="Between 2 and 5 years">Between 2 and 5 years</option>
+                            <option value="Between 5 and 10 years">Between 5 and 10 years</option>
+                            <option value="More than 10 years">More than 10 years</option>
+                        </select>
+                    </div>
+                </div>
+    
+    
+            </div>
+    
+    
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="p-field-select">
+                        <label for="country" class="required">Country</label>
+                        <select id="country" name="country" [(ngModel)]="offer.Address"
+                            (change)="onSelectCountry()">
+                            <option value="">Select a country</option>
+                            <option *ngFor="let country of keys(countries)" [value]="country">{{country}}</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="p-field-select">
+                        <label for="region" class="required">Region</label>
+                        <ng-container *ngIf="offer.Address === 'Tunisia'">
+                            <select id="region" name="region" [(ngModel)]="offer.Region">
+                                <option value="">Select a region</option>
+                                <option *ngFor="let region of keys(countries[offer.Address])" [value]="region">
+                                    {{region}}</option>
+                            </select>
+                        </ng-container>
+                        <ng-container *ngIf="offer.Address !== 'Tunisia'">
+                            <input id="region" name="region" [(ngModel)]="offer.Region"
+                                placeholder="Enter region" />
+                        </ng-container>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="p-field-select">
+                        <label for="city" class="required">City</label>
+                 
+                        <ng-container *ngIf="offer.Address === 'Tunisia' && offer.Region">
+                            <select id="city" name="city" [(ngModel)]="offer.City">
+                                <option value="">Select a city</option>
+                                <option *ngFor="let city of getCities(offer.Address, offer.Region)"
+                                    [value]="city">{{city}}</option>
+                            </select>
+                        </ng-container>
+                        <ng-container *ngIf="offer.Address !== 'Tunisia' || !offer.Region">
+                            <input id="city" name="city" [(ngModel)]="offer.City" placeholder="Enter city" />
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="DesiredMinimumNetSalary" class="required">Desired Minimum Net Salary</label>
+                    <p-inputNumber [size]="70" name="DesiredMinimumNetSalary"
+                        [(ngModel)]="offer.DesiredMinimumNetSalary" [showButtons]="true"
+                        buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" [step]="100.000"
+                        decrementButtonClass="p-button-info" incrementButtonClass="p-button-info"
+                        incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="300" mode="currency"
+                        currency="TND">
+                    </p-inputNumber>
+                </div>
+    
+    
+                <div class="col-md-4">
+                    <label for="currentNetSalary" class="required">Desired Maximum Net Salary</label>
+                    <p-inputNumber [size]="70" name="DesiredMaximumNetSalary"
+                        [(ngModel)]="offer.DesiredMaximumNetSalary" [showButtons]="true"
+                        buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" [step]="100.000"
+                        decrementButtonClass="p-button-info" incrementButtonClass="p-button-info"
+                        incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="300" mode="currency"
+                        currency="TND">
+                    </p-inputNumber>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="in" class="required">In</label>
+                        <select id="in" name="in" [(ngModel)]="offer.in">
+                            <option value="Monthly">Monthly</option>
+                            <option value="weekly">weekly</option>
+                            <option value="Annual">Annual</option>
+                            <option value="Daily">Daily</option>
+                        </select>
+                    </div>
+                </div>
+    
+            </div>
+    
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="form-group">
+                        <label for="descriptionE" class="required">Jobs</label>
+                        <p-listbox [options]="groupedJobs" name="selectedJobs" [group]="true"
+                            [(ngModel)]="offer.JobCategorie" [metaKeySelection]="false" [checkbox]="true"
+                            [filter]="true" [multiple]="true" [listStyle]="{'max-height':'140px'}"
+                            [style]="{'max-width':'100%'}">
+                            <ng-template let-group pTemplate="group">
+                                <div class="flex align-items-center">
+                                    <span>{{group.label}}</span>
+                                </div>
+                            </ng-template>
+                        </p-listbox>
+                    </div>
+                </div>
+            
+                <div class="col-lg-6 col-md-12">
+                    <div class="form-group">
+                        <label for="descriptionE" class="required">Types Of Positions</label>
+                        <p-listbox [options]="typesOfPositions" name="selectedPositions"
+                            [(ngModel)]="offer.TypesOfPositions" [checkbox]="true"
+                            [filter]="true" [multiple]="true"
+                            [listStyle]="{'max-height':'140px'}"
+                            [style]="{'max-width':'100%'}">
+                        </p-listbox>
+                    </div>
+                </div>
+            </div>
+            
+    
+    
+    
+    
+            <div class="grid grid-nogutter justify-content-end mt-5">
+                <p-button type="button" icon="pi pi-search" styleClass="p-button-info mr-2" label="Search" iconPos="right" (click)="searchOffers()"></p-button>
+            </div>
+        </form>
+    </p-card>
+</div>
+<div class="margin-bottom-35"></div>
+</div>

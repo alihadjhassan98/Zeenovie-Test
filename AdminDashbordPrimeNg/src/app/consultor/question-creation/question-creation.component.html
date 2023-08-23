@@ -1,0 +1,113 @@
+<div class="question-creation-container">
+    <h2>Create Question</h2>
+
+
+    <br>
+
+    
+    <form (ngSubmit)="createQuestion()">
+      <div>
+
+        <div class="section-headline margin-top-25 margin-bottom-12">
+          <h5 for="question-text">Question Text:</h5>
+        </div>
+        <input id="question-text" [(ngModel)]="question.text" name="questionText" required />
+      </div>
+  
+      <div>
+
+        <div class="section-headline margin-top-25 margin-bottom-12">
+          <h5 for="question-type">Question Type:</h5>
+        </div>
+
+        <select id="question-type" [(ngModel)]="question.type" name="questionType" required>
+          <option value="single-choice">Single Choice</option>
+          <option value="multiple-choice">Multiple Choice</option>
+        </select>
+      </div>
+  
+
+
+      <div class="section-headline margin-top-25 margin-bottom-12">
+        <h5 >Options:</h5>
+      </div>
+
+    <div class="options-container" *ngFor="let option of question.options; let i = index">
+        <div class="option">
+            <label for="option{{i}}">Option {{i + 1}}:</label>
+            <input id="option{{i}}" [(ngModel)]="option.text" name="option{{i}}" required />
+        </div>
+
+        <ng-container *ngIf="question.type === 'single-choice'; else multipleChoice">
+            <div class="radio-option">
+                <input type="radio" name="correctOption" [checked]="option.isCorrect" (click)="setCorrectOption(i)" />
+                <label for="correctOption{{i}}">Is Correct</label>
+            </div>
+        </ng-container>
+
+        <ng-template #multipleChoice>
+            <div class="checkbox-option">
+                <input type="checkbox" [checked]="option.isCorrect" (change)="toggleOptionSelection(i)" />
+                <label for="isCorrect{{i}}">Is Correct</label>
+            </div>
+        </ng-template>
+    </div>
+
+
+
+
+      <div class="row">
+
+        
+        <div class="col-xl-6 col-md-6">
+          <div class="section-headline margin-top-25 margin-bottom-12">
+            <h5 for="question-categorie">Category:</h5>
+          </div>
+    
+          <div>
+            <select id="question-categorie" [(ngModel)]="question.categorie" name="questionCategorie" required>
+              <option value="" disabled>Select a category</option>
+              <option *ngFor="let category of categories" [value]="category._id">{{ category.title }}</option>
+            </select>
+          </div>
+        </div>
+    
+        <div class="col-xl-6 col-md-6">
+          <div class="section-headline margin-top-25 margin-bottom-12">
+            <h5 for="question-difficulty">Difficulty:</h5>
+          </div>
+    
+          <div>
+            <select id="question-difficulty" [(ngModel)]="question.difficulty" name="questionDifficulty" required>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+              <option value="extreme">Extreme</option>
+            </select>
+          </div>
+        </div>
+    
+        
+    
+        
+    
+      </div>
+
+
+
+
+
+      <div  >
+         <!-- <button class="button button-sliding-icon ripple-effect" type="button" (click)="addOption()">Add Option</button> -->
+        <button class="button button-sliding-icon ripple-effect" type="submit">Create Question<i class="icon-material-outline-arrow-right-alt"></i></button>
+  </div>
+  
+     
+
+  <br>    <br>
+  <br>
+  <br>
+
+    </form>
+  </div>
+  

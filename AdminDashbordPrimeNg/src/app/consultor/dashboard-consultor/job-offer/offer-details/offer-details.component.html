@@ -1,0 +1,145 @@
+<p-toast></p-toast>
+<p-card>
+    <form (ngSubmit)="onSubmit()" #offerDetailsForm="ngForm">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="LevelOfEducation" class="required">Level of Education</label>
+                    <select id="LevelOfEducation" name="LevelOfEducation"
+                        [(ngModel)]="offerDetailsData.LevelOfEducation">
+                        <option value="Primary">Primary</option>
+                        <option value="Secondary">Secondary</option>
+                        <option value="Professional training">Professional training</option>
+                        <option value="Bac">Bac</option>
+                        <option value="Bac +3">Bac +3</option>
+                        <option value="Bac +5">Bac +5</option>
+                        <option value="PhD">PHD</option>
+                        <option value="Expert, Research">Expert, Research</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="LevelOfExperience" class="required">Level of Experience</label>
+                    <select id="LevelOfExperience" name="LevelOfExperience"
+                        [(ngModel)]="offerDetailsData.LevelOfExperience">
+                        <option value="No experience">No experience</option>
+                        <option value="Less than a year">Less than a year</option>
+                        <option value="Between 1 and 2 years">Between 1 and 2 years</option>
+                        <option value="Between 2 and 5 years">Between 2 and 5 years</option>
+                        <option value="Between 5 and 10 years">Between 5 and 10 years</option>
+                        <option value="More than 10 years">More than 10 years</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Availability" class="required">Availability</label>
+                    <select id="Availability" name="Availability" [(ngModel)]="offerDetailsData.Availability">
+                        <option value="Part-time">Part-time</option>
+                        <option value="Full Time">Full Time</option>
+                        <option value="another">another</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <label for="DesiredMinimumNetSalary" class="required">Desired Minimum Net Salary</label>
+                <p-inputNumber [size]="70" name="DesiredMinimumNetSalary"
+                    [(ngModel)]="offerDetailsData.DesiredMinimumNetSalary" [showButtons]="true"
+                    buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" [step]="100.000"
+                    decrementButtonClass="p-button-info" incrementButtonClass="p-button-info"
+                    incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="300" mode="currency"
+                    currency="TND">
+                </p-inputNumber>
+            </div>
+
+
+            <div class="col-md-4">
+                <label for="currentNetSalary" class="required">Desired Maximum Net Salary</label>
+                <p-inputNumber [size]="70" name="DesiredMaximumNetSalary"
+                    [(ngModel)]="offerDetailsData.DesiredMaximumNetSalary" [showButtons]="true"
+                    buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" [step]="100.000"
+                    decrementButtonClass="p-button-info" incrementButtonClass="p-button-info"
+                    incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="300" mode="currency"
+                    currency="TND">
+                </p-inputNumber>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="in" class="required">In</label>
+                    <select id="in" name="in" [(ngModel)]="offerDetailsData.in">
+                        <option value="Monthly">Monthly</option>
+                        <option value="weekly">weekly</option>
+                        <option value="Annual">Annual</option>
+                        <option value="Daily">Daily</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-4 col-md-12">
+                <div class="form-group">
+                    <label for="descriptionE" class="required">Jobs</label>
+                    <p-listbox [options]="groupedJobs" name="selectedJobs" [group]="true"
+                        [(ngModel)]="offerDetailsData.JobCategorie" [metaKeySelection]="false" [checkbox]="true"
+                        [filter]="true" [multiple]="true" [listStyle]="{'max-height':'150px'}"
+                        [style]="{'max-width':'100%'}">
+                        <ng-template let-group pTemplate="group">
+                            <div class="flex align-items-center">
+                                <span>{{group.label}}</span>
+                            </div>
+                        </ng-template>
+                    </p-listbox>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+                <div class="form-group">
+                    <label for="languages" class="required">Types Of Positions</label>
+                    <p-listbox  [options]="languagesss" name="selectedLanguages"
+                        [(ngModel)]="offerDetailsData.languages"[checkbox]="true"
+                        [filter]="true" [multiple]="true"
+                        [listStyle]="{'max-height':'140px'}"
+                        [style]="{'max-width':'100%'}">
+                    </p-listbox>
+                </div>
+            </div>
+        
+            <div class="col-lg-4 col-md-12">
+                <div class="form-group">
+                    <label for="descriptionE" class="required">Types Of Positions</label>
+                    <p-listbox [options]="typesOfPositions" name="selectedPositions"
+                        [(ngModel)]="offerDetailsData.TypesOfPositions" [checkbox]="true"
+                        [filter]="true" [multiple]="true"
+                        [listStyle]="{'max-height':'140px'}"
+                        [style]="{'max-width':'100%'}">
+                    </p-listbox>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="grid grid-nogutter justify-content-center mt-5">
+            <p-button type="button" icon="pi pi-angle-left" styleClass="p-button-info mr-2" label="Back"
+                (click)="onBack()" iconPos="left"></p-button>
+            <p-button type="submit" label="Next" [disabled]="!offerDetailsForm.form.valid" styleClass="p-button-info" icon="pi pi-angle-right"
+                iconPos="right"></p-button>
+
+        </div>
+    </form>
+</p-card>

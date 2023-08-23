@@ -1,0 +1,19 @@
+.options-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.option,
+.radio-option,
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.option label,
+.radio-option label,
+.checkbox-option label {
+    margin-right: 10px;
+}

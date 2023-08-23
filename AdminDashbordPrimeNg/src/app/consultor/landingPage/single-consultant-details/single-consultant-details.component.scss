@@ -1,0 +1,181 @@
+.comment-box {
+    background-color: #f0f2f5;
+    border-radius: 18px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  
+    .comment-box-type {
+      display: flex;
+      align-items: center;
+  
+      .comment-input {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        position: relative; // Add a relative position here
+  
+        input {
+          border: 1px solid #f0f2f5;
+          border-radius: 18px;
+          padding: 5px 5px;
+          padding-right: 35px;
+          margin-left: 10px;
+          width: 100%; // Make the input take the full width
+        }
+  
+        button {
+   
+          border-radius: 18px;
+          padding: 10px 10px;
+          cursor: pointer;
+        
+          display: flex;
+          align-items: center;
+          position: absolute; // Add an absolute position here
+          right: 0px; // Align the button to the right inside the input
+          top: 40%; // Center the button vertically inside the input
+          transform: translateY(-50%); // Center the button vertically inside the input
+          
+    
+  
+          i {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+
+.comment-section {
+     margin-left: 20px;
+
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+  
+    .comment {
+      display: flex;
+      padding: 10px 0;
+      border-bottom: 1px solid #e2e2e2;
+  
+      &:last-child {
+        border-bottom: none;
+      }
+  
+      .comment-author {
+        //margin-right: 5px;
+        margin-left : 0px;
+  
+        .author-image {
+          width: 40px;
+          height: 40px;
+          margin-right: 10px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+  
+      .comment-details {
+        flex-grow: 1;
+  
+
+      
+        .author-name-comment {
+          background-color: #f0f2f5;
+          border-radius: 18px;
+          padding: 8px 12px;
+          font-size: 14px;
+          line-height: 18px;
+          display: block;
+
+          .comment-content{
+            padding: 0px 5px;
+          }
+          .author-name {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+          }
+        }
+  
+        .comment-footer {
+          display: flex;
+          align-items: center;
+          font-size: 12px;
+          margin-top: 5px;
+  
+          .comment-date {
+            color: #999;
+            margin-left: auto;
+          }
+  
+          button {
+            display: flex;
+            align-items: center;
+            background: none;
+            border: none;
+            color: #999;
+            padding: 0;
+            cursor: pointer;
+            transition: color 0.2s;
+  
+            &:hover {
+              color: #3f51b5;
+            }
+  
+            i {
+              margin-right: 5px;
+            }
+  
+            &:not(:last-child) {
+              margin-right: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  .pi-send{
+    font-size: 24px;
+    color: gray;
+  }
+  .liked {
+    color: #3f51b5 !important;
+  }
+  .comment-like.liked {
+    color: blue;
+  }
+
+  .badge{
+    background-color: #eab308;
+    color: #fff;
+    border-radius: 5px;
+    padding: 2px 5px 0px 5px;
+    text-align: center;
+    margin-bottom: 8px !important;
+  }
+.ratingss{
+  padding-bottom: -5 !important;
+}
+
+/* Task Tags */
+.task-tags {
+  display: flex;  /* added */
+  flex-wrap: wrap; /* added, allows wrapping if the width is not enough */
+  margin: 23px 0 3px 0;
+}
+
+.task-tags span {
+  transition: 0.3s;
+  font-size: 14.7px;
+  border-radius: 4px;
+  background-color: rgba(58, 95, 240, 0.07);
+  color: #3f51b5;
+  display: inline-flex; 
+  padding: 6px 15px;
+  margin: 2px;  /* changed from 2px 0 */
+  line-height: 24px;
+}

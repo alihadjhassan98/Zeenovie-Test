@@ -1,0 +1,148 @@
+<form [formGroup]="trainingQualificationForm" (ngSubmit)="onSubmit()">
+    <p-dialog class='custom-close-button' [(visible)]="displayModal" [modal]="true" [style]="{height :'38vw',width:'50vw'}"
+        [baseZIndex]="10000" [draggable]="true" [resizable]="true" [closable]="false">
+        <ng-template pTemplate="header">
+            <div class="p-dialog-title">Add Professional Data</div>
+        </ng-template>
+        <div class="p-mb-5 mt-5">
+            <div class="grid mt-5">
+                <div class="container">
+    
+        
+              
+    
+                    <div class="row">
+                        <!-- 
+                        <input formControlName="_id" type="hidden" />
+                
+                
+                        <input type="hidden" hidden formControlName="IdUser" readonly /> -->
+                        <div class="col-md-6 mt-2">
+                            <label for="typeOfDegree" class="required">Type of Degree</label>
+                            <select id="typeOfDegree" [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('typeOfDegree')}" formControlName="typeOfDegree" required>
+                                <option value="">Select a Type</option>
+                                <option value="Training">Training</option>
+                                <option value="University">University</option>
+                                <option value="Secondary">Secondary</option>
+                                <option value="Online">Online</option>
+                                <option value="other">other</option>
+                            </select>
+                            <div *ngIf="isFieldInvalid('typeOfDegree')" class="p-error">
+                                <span>Type of Degree is required </span>
+                            </div>
+                        </div>
+                
+                
+                
+                        <div class="col-md-6 mt-2">
+                            <label for="degreeObtained" class="required">Degree Obtained</label>
+                            <input type="text" [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('degreeObtained')}" id="degreeObtained" formControlName="degreeObtained" />
+                            <div *ngIf="isFieldInvalid('degreeObtained')" class="p-error">
+                                <span>Degree Obtained </span>
+                            </div>
+                        </div>
+                
+                        <div class="col-md-6 mt-2">
+                            <label for="periodStart">Period Start</label>
+                            <input type="date" [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('periodStart')}" id="periodStart" formControlName="periodStart" pInputText />
+                        
+                            <div *ngIf="isFieldInvalid('periodStart')" class="p-error">
+                                <span>Period Start is required </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="periodEnd">Period End</label>
+                            <input type="date" [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('periodEnd')}" id="periodEnd" formControlName="periodEnd" pInputText />
+                            <div *ngIf="isFieldInvalid('periodEnd')" class="p-error">
+                                <span>Period End is required </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label for="country">Country</label>
+                            <select [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('country')}" id="country" formControlName="country">
+                                <option value="USA">USA</option>
+                                <option value="Canada">Canada</option>
+                                <option value="UK">UK</option>
+                           
+                            </select>
+                            <div *ngIf="isFieldInvalid('country')" class="p-error">
+                                <span>Country is required </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label for="institution">Institution</label>
+                            <select [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('institution')}" id="institution" formControlName="institution">
+                                <option value="Harvard University">Harvard University</option>
+                                <option value="Stanford University">Stanford University</option>
+                                <option value="MIT">MIT</option>
+                            </select>
+                            <div *ngIf="isFieldInvalid('institution')" class="p-error">
+                                <span>Institution is required </span>
+                            </div>
+                        </div>
+                
+                        <div class=" col-md-6 d-flex mt-2">
+                            <label for="status">Status</label>
+                            <div class=" p-field-radiobutton flex align-items-center ml-5">
+                                <input [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('status')}" type="radio" id="statusObtained" formControlName="status" value="Obtained" />
+                                <label for="statusObtained">Obtained</label>
+                            </div>
+                            <div class="  p-field-radiobutton flex align-items-center ml-5">
+                                <input [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('status')}" type="radio" id="statusNotValidated" formControlName="status" value="Not validated" />
+                                <label for="statusNotValidated">Not validated</label>
+                            </div>
+                            <div class=" p-field-radiobutton flex align-items-center ml-5">
+                                <input  [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('status')}"type="radio" id="status" formControlName="status" value="In progress" />
+                                <label for="statusInProgress">In progress</label>
+                            </div>
+                            <div *ngIf="isFieldInvalid('status')" class="p-error">
+                                <span>Status is required </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="grade">Grade</label>
+                            <input  [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('grade')}"type="number" id="grade" formControlName="grade" />
+                            <div *ngIf="isFieldInvalid('grade')" class="p-error">
+                                <span>grade is required </span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                            <label for="description">Description</label>
+                            <textarea id="description" formControlName="description"></textarea>
+                        </div>
+                
+                
+                
+                    </div>
+                   
+                       
+            
+                    
+              
+    
+                </div>
+            </div>
+        </div>
+    
+        <div>
+        </div>
+    
+        <ng-template pTemplate="footer">
+            <button pButton pRipple icon="pi pi-times" (click)="closeModal()" label="No"
+                class="p-button-outlined p-button-rounded p-button-danger blue-hover"></button>
+            <button type="submit" pButton pRipple icon="pi pi-check"
+             
+                label="Save" class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+        </ng-template>
+    </p-dialog>
+    <p-dialog header="Are you sure you want to close this window?" [(visible)]="displayPosition" [modal]="true"
+        [style]="{width: '20vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <p> Your changes will be lost if you leave without saving.</p>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple icon="pi pi-times" (click)="displayPosition=false" label="No"
+                class="p-button-outlined p-button-rounded p-button-danger blue-hover"></button>
+            <button pButton pRipple icon="pi pi-check" (click)="closeAllModals()" label="Yes"
+                class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+        </ng-template>
+    </p-dialog>
+    </form>

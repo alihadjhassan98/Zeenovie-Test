@@ -1,0 +1,19 @@
+<div class="results-container">
+    <h2>Quiz Results</h2>
+    <p>Congratulations on completing the quiz! Here's how you did:</p>
+    
+    <div class="results-summary">
+      <p>
+        You answered <span class="correct-count">{{ correctCount }}</span> out of
+        <span class="total-count">{{ totalQuestions }}</span> questions correctly.
+      </p>
+      <p>
+        Your score: <span class="score">{{ (correctCount / totalQuestions * 100).toFixed(2) }}%</span>
+      </p>
+    </div>
+    
+    <button class="back-button button button-sliding-icon ripple-effect " routerLink="/">Back Home<i class="icon-material-outline-home"></i></button>
+
+
+  </div>
+  

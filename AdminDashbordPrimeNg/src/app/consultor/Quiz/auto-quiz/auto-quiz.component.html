@@ -1,0 +1,32 @@
+<div class="container">
+    <h2>Auto Quiz Generator</h2>
+    
+    <!-- Consultant selection dropdown -->
+    <label for="consultant">Select Consultant:</label>
+    <select [(ngModel)]="selectedConsultant" name="consultant" id="consultant">
+      <option *ngFor="let consultant of consultants" [value]="consultant._id">{{ consultant.username }}</option>
+    </select>
+    
+    <!-- Skills selection checkboxes 
+    <div *ngIf="selectedConsultant">
+      <label>Select Skills:</label>
+      <div *ngFor="let skill of selectedConsultantSkills">
+        <input type="checkbox" [(ngModel)]="selectedSkills[skill._id]" /> {{ skill.competence }}
+      </div>
+    </div>
+    
+     Category selection dropdown 
+    <div *ngIf="selectedSkills">
+      <label for="category">Select Category:</label>
+      <select [(ngModel)]="selectedCategory" name="category" id="category">
+        <option *ngFor="let category of categories" [value]="category._id">{{ category.title }}</option>
+      </select>
+    </div>-->
+    
+    <!-- Generate Quiz button -->
+
+    <span class="button button-sliding-icon ripple-effect" (click)="generateQuiz()" >Generate Quiz <i class="icon-material-outline-arrow-right-alt"></i></span>
+
+    
+  </div>
+  

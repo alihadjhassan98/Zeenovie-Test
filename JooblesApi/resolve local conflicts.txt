@@ -1,0 +1,41 @@
+
+Title: Git merge conflict resolution and rebase issue
+
+Explanation: The user tried to merge changes from the remote branch 'main' into their local 'main' branch using the command git merge origin main. However, 
+this resulted in a merge conflict in the src/main.ts file. Next,
+ the user tried to pull changes again from the remote 'main' branch using git pull origin main but received an error message saying that there were unmerged files in their working directory. 
+The error message suggested fixing the conflict manually and then committing the result.
+
+After adding the resolved file to the staging area using git add .,
+ the user tried to commit the changes using the command git gommit -m "conflicts problem",
+  which resulted in an error message saying that the command was not recognized. The correct command for committing changes is git commit -m "commit message", which the user used to commit their changes.
+
+
+However, the user encountered another issue when trying to pull changes again from the remote 'main' branch.
+ Git reported that there was already a rebase-merge directory and suggested using git rebase (--continue | --abort | --skip) to resolve the issue. The user then ran git rebase --continue and successfully rebased their changes onto the
+
+
+Based on your terminal output, here is a summary of the steps you took to resolve the conflicts in your Git repository:
+
+    You attempted to merge the changes from the remote branch main into your local branch main.
+    Git detected a conflict in the src/main.ts file and informed you that you needed to fix the conflict before committing.
+    You tried to pull the remote branch again, but Git informed you that you had unmerged files and that you needed to fix them and commit the changes.
+    You added all the changes to the staging area with the git add . command.
+    You attempted to commit the changes with the command git gommit, which returned an error because gommit is not a Git command.
+    You attempted to commit the changes again with the correct command git commit, but Git informed you that you had not concluded
+	 the merge and that you needed to commit your changes before merging.
+    You checked the status of your Git repository with the git status command and found that all conflicts were fixed, but you still needed to conclude the merge.
+    You aborted the merge with the command git merge --abort.
+    You tried to pull the remote branch again, but Git informed you that there was already a rebase-merge directory and that you needed to remove it before pulling.
+    You attempted to commit the changes again with the correct command git commit, but Git informed you that you were currently editing a commit while rebasing.
+    You continued the rebase with the command git rebase --continue.
+    You successfully rebased and updated the main branch with the changes from the remote branch.
+    You committed the changes with the command git commit -m "conflicts problemss".
+
+To summarize the steps you took to resolve the conflicts:
+
+    Fix the conflicts in the affected file(s).
+    Add the changes to the staging area with the git add . command.
+    Commit the changes with the git commit command.
+    If you encounter any errors, check the status of your Git repository with the git status command and follow the instructions given by Git to resolve the errors.
+

@@ -1,0 +1,62 @@
+<!-- <form (ngSubmit)="onSubmit()" #offerSettingsForm="ngForm">
+  
+  
+
+  
+    <button type="submit" class="btn btn-primary" [disabled]="!offerSettingsForm.form.valid">Next</button>
+  </form>
+   -->
+
+<p-card>
+
+    <form (ngSubmit)="onSubmit()" #offerSettingsForm="ngForm">
+  <div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="date">
+                Start date  </label>
+            <input type="date" class="form-control" id="date" name="date"
+                [ngModel]="offerSettingsData.date | date: 'yyyy-MM-dd' "(ngModelChange)="offerSettingsData.date= $event" disabled
+        />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="dateFin">
+                End date</label>
+            <input type="date" class="form-control" id="dateFin" name="dateFin"
+                [ngModel]="offerSettingsData.dateFin | date: 'yyyy-MM-dd' "(ngModelChange)="offerSettingsData.dateFin= $event"
+        />
+        </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="responable" class="required">Responable</label>
+    <input #responable="ngModel" type="text" class="form-control" id="responable" name="responable"
+        placeholder=" {{this.authService.LoggedUserName}}" [(ngModel)]="offerSettingsData.responable"
+        [ngClass]="{ 'ng-dirty': (responable.invalid && submitted) || (responable.dirty && responable.invalid) }"
+        required />
+
+</div>
+<small *ngIf="(responable.invalid && submitted) || (responable.dirty && responable.invalid)"
+    class="p-error">Responable is required.</small>
+            <label for="required" class="required">Email For contact</label>
+            <input
+            type="email"
+            class="form-control"
+            id="emailforsendmails"
+            name="emailforsendmails"
+            placeholder=" {{this.authService.emailUser}}"
+            [(ngModel)]="offerSettingsData.emailforsendmails"
+            required
+          />
+          
+        <div class="grid grid-nogutter justify-content-center mt-5">
+            <p-button type="button" icon="pi pi-angle-left" styleClass="p-button-info mr-2" label="Back" (click)="onBack()"
+                iconPos="left"></p-button>
+            <p-button type="submit" label="Next" styleClass="p-button-info" [disabled]="!offerSettingsForm.form.valid" icon="pi pi-angle-right"
+                iconPos="right"></p-button>
+
+        </div>
+    </form>
+</p-card>

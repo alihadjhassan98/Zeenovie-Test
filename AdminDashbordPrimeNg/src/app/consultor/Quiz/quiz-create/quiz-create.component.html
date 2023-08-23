@@ -1,0 +1,70 @@
+<h2>Create Quiz</h2>
+
+
+
+
+
+<!-- Row -->
+
+<form (ngSubmit)="createQuiz()" #quizForm="ngForm">
+
+<div  class="row">
+
+  <!-- Dashboard Box -->
+  <div class="col-xl-12">
+    <div class="dashboard-box margin-top-0">
+
+      <!-- Headline -->
+      <div class="headline">
+        <h3><i class="icon-feather-folder-plus"></i> Quiz Submission Form</h3>
+      </div>
+
+      <div class="content with-padding padding-bottom-10">
+        <div class="row">
+
+          <div class="col-xl-4">
+            <div class="submit-field">
+              
+
+              <h5 for="title" >Title</h5>
+              <input type="text" id="title" name="title" [(ngModel)]="quiz.title" required>
+            </div>
+
+            <div class="submit-field">
+              <h5 for="timer" >Timer (in minutes)</h5>
+
+              <input type="number" id="timer" name="timer" [(ngModel)]="quiz.timer" required>
+
+            </div>
+
+
+          </div>
+
+
+
+          
+
+          <div class="col-xl-12">
+            <div class="submit-field">
+              <h5 for="description" >Description</h5>
+              <textarea cols="30" rows="5" class="with-border" id="description" name="description" [(ngModel)]="quiz.description" required></textarea>
+              
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-12">
+    <button type="submit" class="button ripple-effect big margin-top-30" ><i class="icon-feather-plus"></i>Create Quiz</button>
+
+  </div>
+
+</div>
+
+</form>
+
+<!-- Row / End -->
+

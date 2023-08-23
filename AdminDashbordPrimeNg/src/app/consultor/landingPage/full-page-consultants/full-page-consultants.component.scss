@@ -1,0 +1,37 @@
+.product-item {
+    .product-item-content {
+        border: 1px solid var(--surface-d);
+        border-radius: 3px;
+        margin: .3rem;
+        text-align: center;
+        padding: 2rem 0;
+    }
+
+    .product-image {
+        width: 50%;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    }
+}
+
+.freelancer-overview {
+	text-align: center;
+	padding: 38px 20px !important;
+	flex-grow: 1;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.freelancerss {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    margin: 0 30px 30px 0 !important;
+    width: calc(70% * (1/2) - 60px) !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12) !important;
+    background-color: #fff !important;
+    transition: 0.3s !important;
+    position: relative !important;
+    cursor: default !important;
+}

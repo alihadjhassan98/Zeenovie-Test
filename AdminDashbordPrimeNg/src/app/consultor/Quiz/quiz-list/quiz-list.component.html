@@ -1,0 +1,119 @@
+<h2>Assigned Quizzes</h2>
+
+
+  <div *ngFor="let quiz of quizzes">
+  <ng-container *ngIf="canViewQuiz(quiz)">
+
+  <!-- Tasks Container -->
+  <div class="tasks-list-container tasks-grid-layout margin-top-35">
+				
+    <!-- Task -->
+    <a  class="task-listing">
+
+      <!-- Job Listing Details -->
+      <div class="task-listing-details">
+
+        <!-- Details -->
+        <div class="task-listing-description">
+          <h2 class="task-listing-title">{{ quiz.title }}</h2>
+          <ul class="task-icons">
+            <li><i class="icon-material-outline-assignment"></i> Description: {{ quiz.description }}</li>
+            <li><i class="icon-material-outline-access-time"></i> {{ quiz.timer }} minutes</li>
+          </ul>
+        </div>
+      
+      </div>
+      <div class="task-listing-details">
+
+
+      <div class="task-listing-description">
+        <h3>Questions:</h3>
+    <ul *ngIf="quiz.questions && quiz.questions.length > 0">
+      <li *ngFor="let question of quiz.questions">
+        {{ question.text }}
+        <ul>
+          <li *ngFor="let option of question.options">
+            {{ option.text }} ({{ option.isCorrect ? 'Correct' : 'Incorrect' }})
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+      
+
+
+
+      
+
+
+
+
+
+
+
+
+
+    <div *ngIf="quiz.assignedTo.length > 0">
+      <div class="task-listing-bid">
+        <div class="task-listing-bid-inner">
+          <div class="task-offers">
+            <strong>Assigned To:</strong>
+            <li *ngFor="let userId of quiz.assignedTo">
+              {{ assignedToUsers[userId]?.username || userId }}
+            </li>
+
+
+          </div>
+  
+        
+        
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+      <div class="task-listing-bid">
+        <div class="task-listing-bid-inner">
+          <div class="task-offers">
+            
+
+
+          </div>
+
+          <br>
+          
+        
+
+    <a class="button button-sliding-icon ripple-effect" [routerLink]="['/dashboardConsultor/quizzes/update', quiz._id]">Update</a>
+    <a class="button button-sliding-icon gray ripple-effect" [routerLink]="['/dashboardConsultor/quizzes/create-questions', quiz._id]">Add Questions</a>
+    <a class="button button-sliding-icon dark ripple-effect" (click)="deleteQuiz(quiz._id)">Delete</a>
+
+
+
+        
+        
+        
+        </div>
+
+      </div>
+
+
+      
+    </a>
+
+    
+  </div>
+</ng-container>
+
+</div>
+
+  <!-- Tasks Container / End -->
+  

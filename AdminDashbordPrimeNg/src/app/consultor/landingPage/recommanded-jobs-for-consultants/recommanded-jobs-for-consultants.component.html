@@ -1,0 +1,195 @@
+<!-- Featured Jobs -->
+<div class="section  margin-top-45 padding-top-65 padding-bottom-75" >
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12">
+
+
+
+				
+				
+				<!-- Section Headline -->
+				<div class="section-headline margin-top-0 margin-bottom-35">
+					<h3>Assigned Quizzes</h3>
+					<a routerLink="/home/full-page-jobs" class="headline-link">Browse All Jobs</a>
+				</div>
+
+				<div>
+					<ul>
+					  <li *ngFor="let quiz of assignedQuizzes">
+						
+
+
+
+						<!-- Freelancers List Container -->
+			<div class="freelancers-container freelancers-list-layout margin-top-35">
+				
+				<!--Freelancer -->
+				<div class="freelancer">
+
+					<!-- Overview -->
+					<div class="freelancer-overview">
+						<div class="freelancer-overview-inner">
+							
+							<!-- Bookmark Icon -->
+							<span class="bookmark-icon"></span>
+							
+							<!-- Avatar -->
+							<div class="freelancer-avatar">
+								<div class="verified-badge"></div>
+								<a ><img src="assets\test.png" alt=""></a>
+							</div>
+
+							<!-- Name -->
+							<div class="freelancer-name">
+								<h4><a href="#">{{ quiz.title }} <img class="flag" src="images/flags/gb.svg" alt="" title="United Kingdom" data-tippy-placement="top"></a></h4>
+								<span>{{ quiz.description }}</span>
+								<!-- Rating -->
+								<div class="freelancer-rating">
+									<li>Company Name:  <strong><i class="icon-material-outline-location-on"></i> {{ assignedToUsers[companyId]?.username }}</strong></li>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Details -->
+					<div class="freelancer-details">
+						<div class="freelancer-details-list">
+							<ul>
+								<button (click)="takeQuiz(quiz._id)" class="button button-sliding-icon ripple-effect">Take Quiz <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- Freelancer / End -->
+
+				
+	
+			</div>
+			<!-- Tasks Container / End -->
+
+
+
+
+
+
+
+				
+				
+				
+						
+						<!-- Add other properties as needed -->
+					  </li>
+					</ul>
+				  </div>
+				  
+				
+				<!-- Jobs Container -->
+				<div class="listings-container compact-list-layout margin-top-35">
+		
+					<div  *ngIf="">
+				
+						<div class="custom-skeleton p-4" >
+							<ul class="m-0 o-0">
+								<li class="mb-3">
+									<div class="flex ml-0">
+										<p-skeleton shape="rectangle" size="5rem" styleClass="mr-2 mt-0 "></p-skeleton>
+										<div style="flex: 1" class="mt-1">
+											<p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+											<p-skeleton width="75%"></p-skeleton>
+										</div>
+									</div>
+								</li>
+								<li class="mb-3">
+									<div class="flex ml-0">
+										<p-skeleton shape="rectangle" size="5rem" styleClass="mr-2 mt-0 "></p-skeleton>
+										<div style="flex: 1" class="mt-1">
+											<p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+											<p-skeleton width="75%"></p-skeleton>
+										</div>
+									</div>
+								</li>
+								<li class="mb-3">
+									<div class="flex ml-0">
+										<p-skeleton shape="rectangle" size="5rem" styleClass="mr-2 mt-0 "></p-skeleton>
+										<div style="flex: 1" class="mt-1">
+											<p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+											<p-skeleton width="75%"></p-skeleton>
+										</div>
+									</div>
+								</li>
+								<li class="mb-3">
+									<div class="flex ml-0">
+										<p-skeleton shape="rectangle" size="5rem" styleClass="mr-2 mt-0 "></p-skeleton>
+										<div style="flex: 1" class="mt-1">
+											<p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+											<p-skeleton width="75%"></p-skeleton>
+										</div>
+									</div>
+								</li>
+								<li class="mb-3">
+									<div class="flex ml-0">
+										<p-skeleton shape="rectangle" size="5rem" styleClass="mr-2 mt-0 "></p-skeleton>
+										<div style="flex: 1" class="mt-1">
+											<p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+											<p-skeleton width="75%"></p-skeleton>
+										</div>
+									</div>
+								</li>
+								
+						
+						
+							</ul>
+						</div>
+					  </div>
+			
+					  <ng-template #loadedTemplate>
+						<div *ngFor="" >
+							<a [@fadeIn]  *ngIf="" class="job-listing with-apply-button" [routerLink]="">
+			
+			
+							
+								<!-- Job Listing Details -->
+								<div class="job-listing-details">
+			
+									<!-- Logo -->
+									<div *ngIf="" class="job-listing-company-logo">
+										<img  [src]="" alt="" />
+									  </div>
+									  
+									  
+			
+									<!-- Details -->
+									<div class="job-listing-description">
+										<h3 class="job-listing-title"></h3>
+			
+										<!-- Job Listing Footer -->
+										<div class="job-listing-footer">
+											<ul>
+												<li *ngIf=""><i class="icon-material-outline-business"></i>  </li>
+			
+												<li><i class="icon-material-outline-location-on"></i> </li>
+												<li><i class="icon-material-outline-business-center"></i> </li>
+												<li><i class="icon-material-outline-access-time"></i> </li>
+			
+											</ul>
+										</div>
+									</div>
+			
+									<!-- Apply Button -->
+									<span class="list-apply-button ripple-effect">Apply Now</span>
+								</div>
+							</a>	
+						</div>
+					  </ng-template>	<!-- Job Listing -->
+	
+				</div>
+				<!-- Jobs Container / End -->
+				<!-- Paginator -->
+                <!-- <p-paginator [rows]="rows" [totalRecords]="totalRecords" (onPageChange)="paginate($event)" [rowsPerPageOptions]="[10,20,30]"></p-paginator> -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Featured Jobs / End -->

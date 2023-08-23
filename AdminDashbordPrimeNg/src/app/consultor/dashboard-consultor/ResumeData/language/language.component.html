@@ -1,0 +1,68 @@
+<!-- Row -->
+<p-toast></p-toast>
+<div class="row">
+    <!-- Dashboard Box -->
+    <div class="col-xl-12">
+        <div class="dashboard-box margin-top-0">
+            <!-- Headline -->
+            <div class="headline ">
+                <div class="d-flex bd-highlight">
+                    <div class="p-2 flex-grow-1 bd-highlight">
+                        <!-- <a title="add" data-tippy-placement="top"><i class="icon-feather-plus"></i></a> -->
+                        <h2><i></i><b>Languages </b></h2>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                        <button pButton pRipple type="button"
+                            class=" p-button-rounded  p-button-outlined icon-line-awesome-plus"
+                            (click)="openModalForCreate()"> </button>
+                    </div>
+                </div>
+
+
+                <div class="content padding-bottom-0"> 
+                    <div *ngIf="!(languages?.length ?? 0); else show">
+                        <div class="card">
+                            <div class="card-body mt-1">
+                                <p-messages [(value)]="messages" [enableService]="false"
+                                    [closable]="false"></p-messages>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #show>
+                        <div *ngFor="let item of languages">
+
+
+                            <div class="card-body">
+                                <p class="card-text"></p>
+                                <div class="card ">
+                                    <div class="card-header padding-bottom-0 ">
+                                        <div class="note-buttons">
+                                            <button class="delete-button" title="Remove" (click)="confirmDelete(item)" data-tippy-placement="top">
+                                              <i class="icon-feather-trash-2"></i>
+                                            </button>
+                                          
+                                            <button class="edit-button" title="Edit" (click)="openModalForUpdate(item)" data-tippy-placement="top">
+                                              <i class="icon-feather-edit"></i>
+                                            </button>
+                                          </div>
+                                    </div>
+
+                                    <h3 class="card-text icon-material-outline-language">{{item.language}} | {{item.level}}</h3>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-add-languages (LangueAdded)="createLangue($event)">
+</app-add-languages>
+
+<app-update-languages [hidden]="!isEditing"
+    (LangueUpdated)="loadLaguages()">
+</app-update-languages>

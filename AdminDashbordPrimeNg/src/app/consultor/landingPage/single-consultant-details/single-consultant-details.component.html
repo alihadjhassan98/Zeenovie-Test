@@ -1,0 +1,228 @@
+<div class="single-page-header freelancer-header" data-background-image="images/single-freelancer.jpg">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="single-page-header-inner">
+					<div class="left-side" *ngIf="image">
+						<div class="header-image freelancer-avatar"><img [src]="'data:image/png;base64,' + image.data" alt=""></div>
+						<div class="header-details" *ngIf="personalData && professionaldata" >
+							<h3>{{personalData.Name}}&nbsp;{{personalData.FirstName}} <span>{{professionaldata.Title}}</span></h3>
+							<ul>
+                                <li class="badge">
+                                 {{averageRating}}
+                                </li>
+                             
+                    
+								<li class="ratingss" ><p-rating
+                                    [(ngModel)]="averageRating"
+                                    [readonly]="false"
+                                    [cancel]="false"
+                        
+                                    (onRate)="submitRating($event)"
+                                  ></p-rating>
+                                   </li>
+								<li><img class="flag" src="images/flags/de.svg" alt=""><i class="icon-material-outline-location-on"></i>&nbsp;{{personalData.Address }},
+                                    {{personalData.Region }}, {{personalData.Country }}</li>
+								
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		
+		<!-- Content -->
+		<div class="col-xl-8 col-lg-8 content-right-offset">
+			
+			<!-- Page Content -->
+			<div class="single-page-section">
+				<h3 class="margin-bottom-25" *ngIf="personalData">About Me</h3>
+                    <p>{{personalData.about}}</p>
+			</div>
+
+			<!-- Boxed List -->
+			<div class="boxed-list margin-bottom-60">
+				<div class="boxed-list-headline">
+					<h3><i class="icon-material-outline-business"></i> Professional Experience</h3>
+				</div>
+				<ul class="boxed-list-ul">
+					<li>
+						<div class="boxed-list-item">
+							<!-- Content -->
+							<div class="item-content" *ngFor="let item of proexperience">
+								<h4>{{item.JobTitle}} | {{item.JobType}} <span>   </span></h4>
+								<div class="item-details margin-top-10">
+								
+									<div class="detail-item"><i class="icon-material-outline-date-range"></i>{{ item.Period | dateRange:item.Until }}</div>
+								</div>
+								<div class="item-description">
+									<p>{{item.TasksAndMissions}} </p>
+								</div>
+							</div>
+						</div>
+					</li>
+				
+				</ul>
+
+         
+				<div class="clearfix"></div>
+	
+
+			</div>
+			<!-- Boxed List / End -->
+			
+			<!-- Boxed List -->
+			<div class="boxed-list margin-bottom-60">
+				<div class="boxed-list-headline">
+					<h3><i class="icon-material-outline-business"></i> Trainings and Qualifications</h3>
+				</div>
+				<ul class="boxed-list-ul"  *ngFor="let item of trainingsQualifications">
+					<li>
+						<div class="boxed-list-item" >
+					
+						
+             
+							<!-- Content -->
+							<div class="item-content">
+								<h4>{{item.degreeObtained}} | {{item.typeOfDegree}}</h4>
+								<div class="item-details margin-top-7">
+									<div class="detail-item"><a href="#"><i class="icon-material-outline-check-circle"></i> {{ item.status }} In <span> {{item.country}}  </span></a></div>
+									<div class="detail-item"><i class="icon-material-outline-date-range"></i> {{ item.periodStart | dateRange:item.periodEnd }}</div>
+								</div>
+								<div class="item-description">
+									<p>{{item.description}}</p>
+								</div>
+							</div>
+						</div>
+					</li>
+			
+				</ul>
+			</div>
+			<!-- Boxed List / End -->
+
+		</div>
+		
+
+		<!-- Sidebar -->
+		<div class="col-xl-4 col-lg-4">
+			<div class="sidebar-container">
+             
+				<!-- Profile Overview -->
+				<div class="profile-overview">
+					<div class="overview-item" *ngIf="professionaldata"><strong>Level Of Education</strong><span> {{professionaldata.LevelOfEducation}}</span></div>
+					<div class="overview-item"*ngIf="professionaldata"><strong>Level Of Experience</strong><span>{{professionaldata.LevelOfExperience}}</span></div>
+				</div>
+
+				<!-- Button -->
+				<a class="apply-now-button popup-with-zoom-anim margin-bottom-50">Information</a>
+
+
+				<!-- Widget -->
+				<div class="sidebar-widget">
+					<h3>Skills</h3>
+					<div class="task-tags" >
+						<div *ngFor="let item of skills ">
+                            <span >{{item.competence}}</span>
+                        </div>
+					
+					</div>
+				</div>
+
+                <div class="sidebar-widget">
+					<h3>Languages</h3>
+					<div class="task-tags" >
+						<div *ngFor="let item of languages ">
+                            <span >{{item.language}}</span>
+                        </div>
+					
+					</div>
+				</div>
+
+
+
+				<!-- Widget -->
+				<div class="sidebar-widget">
+					<h3>Attachments</h3>
+					<div class="attachments-container">
+						<a  [routerLink]="['/dashboardConsultor/cv',this.getUserId() ]"class="attachment-box ripple-effect"><span>Cv Platform</span><i>PDF</i></a>
+						<!-- <a href="#" class="attachment-box ripple-effect"><span>Contract</span><i>DOCX</i></a> -->
+					</div>
+				</div>
+
+				<!-- Sidebar Widget -->
+	
+              
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Spacer -->
+<div class="margin-top-15"></div>
+<!-- Spacer / End-->
+
+<div class="container mb-5">
+    <div class="boxed-list-headline">
+        <h3><i class="  icon-material-outline-feedback "></i> FeedBacks</h3>
+    </div>
+
+ <div class="card mt-3">
+    <div class="card-body">
+        <div class="comment-box">
+            <div class="comment-box-type">
+              <!-- UserAvatar content -->
+              <div class="comment-input">
+                <input [(ngModel)]="newCommentContent" type="text" value="" name="content" placeholder="Add a comment ..." />
+                <button type="button" (click)="addComment()" ><i class="pi pi-send"></i></button>
+              </div>
+            </div>
+            <div class="comment-box-list" id="comment-box-list">
+              <!-- comments.map(...) content -->
+            </div>
+          </div>
+          <div *ngFor="let comment of comments">
+            <div class="comment-section ml-5 mt-3">
+                <div class="comment">
+                    <div class="comment-author">
+                        <ng-container  *ngIf="comment.entrepriseimages.length > 0">
+                            <img [src]="'data:image/png;base64,' + comment.entrepriseimages[0].data" alt="" class="author-image">
+                        </ng-container>
+                    </div>
+                    <div class="comment-details">
+                        <div class="author-name-comment">
+                            <span class="author-name" *ngIf="comment.entreprisedata.length > 0">{{
+                                comment.entreprisedata[0].nameE || 'Author Name' }}</span>
+                            <p class="comment-content ml-0">{{ comment.content }}</p>
+                        </div>
+                        <div class="comment-footer">
+                            <button class="comment-like" [ngClass]="{ liked: comment.likedBy.includes(this.likeduserid ?? '') }" (click)="toggleLike(comment)">
+                                <i class="pi pi-thumbs-up"></i> Like
+                              </button>
+                            <button class="comment-reply">
+                                <i class="pi pi-trash"></i> Delete
+                            </button>
+                            <span class="comment-date">Posted {{ comment.commentedAt | date: 'medium' }}</span>
+                            <span class="like-count"> &nbsp; {{ comment.likes }} Likes</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more comments here -->
+            </div>
+        </div>
+        </div>
+          </div>
+</div>
+ 
+
+
+
+
+  

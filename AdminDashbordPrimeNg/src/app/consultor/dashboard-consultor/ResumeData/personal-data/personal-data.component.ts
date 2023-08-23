@@ -1,0 +1,310 @@
+import { Router } from '@angular/router';
+import { ImageService } from 'src/app/consultor/services/image.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { PersonalDataDTO } from './../../../models/personal-data.model';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Message, MessageService, PrimeNGConfig } from 'primeng/api';
+import { PersonalDataService } from 'src/app/consultor/services/personal-data.service';
+import { ImageDTO } from 'src/app/consultor/models/image.model';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { data } from 'src/app/utils/data';
+
+@Component({
+  selector: 'app-personal-data',
+  templateUrl: './personal-data.component.html',
+  styleUrls: ['./personal-data.component.scss']
+})
+
+
+
+export class PersonalDataComponent {
+  displayModal!: boolean;
+  displayPosition!: boolean;
+  position!: string;
+  stateOptions!: any[];
+  value1: string = "off";
+  value2!: number;
+  personalData!: PersonalDataDTO;
+  image!: ImageDTO;
+  selectedFile: File | null = null;
+  inputs = [{ value: '' }];
+  maxInputs = 2;
+  messages!: Message[];
+  numberOfPersonaldata: number = 0;
+  newPersonalData = new PersonalDataDTO();
+  isEditing = false;
+  submitted = false;
+  countries = data;
+  isLoading: boolean = true;
+
+  constructor(private primengConfig: PrimeNGConfig,
+    private personalDataService: PersonalDataService,
+    private authService: AuthService,
+    private imageService: ImageService,
+    private messageService: MessageService,
+    private router: Router,
+    private formBuilder: FormBuilder) { }
+    @ViewChild('fileInput') fileInput!: ElementRef;
+    @ViewChild('profilePic') profilePic!: ElementRef;
+
+
+ 
+    form: FormGroup = new FormGroup({
+      Name: new FormControl(''),
+      FirstName: new FormControl(''),
+      Gender:new FormControl(''),
+      MaritalStatus:new FormControl(''),
+      Country :new FormControl(''),
+      Region:new FormControl(''),
+      City: new FormControl(''),
+      Dateofbirth :new FormControl(''),
+      Address:new FormControl(''),
+      Nationality:new FormControl(''),
+      phoneNumber:new FormControl(''),
+
+   });
+
+
+
+
+
+  ngOnInit() {
+
+    this.form = this.formBuilder.group({
+      Name: ['', Validators.required],
+      FirstName: ['', Validators.required],
+      Country :['', Validators.required],
+      Region :['', Validators.required],
+      City:['', Validators.required],
+      phoneNumber:['', Validators.required],
+      MaritalStatus:['', Validators.required],
+      Gender :['', Validators.required],
+      Dateofbirth :['', Validators.required],
+      Address:['', Validators.required],
+      Nationality:['', Validators.required],
+     // DateOfBirth: ['', [Validators.required, Validators.max(this.minDate)]],
+    });
+    this.messages = [
+      { severity: 'info', summary: 'Info', detail: 'You havent figured out your Personal Data' },
+
+    ];
+    this.primengConfig.ripple = true;
+    this.loadUserDataAndImage();
+    this.getPersonalDataByUserId()
+  }
+
+
+  openModalForUpdate() {
+    this.isEditing = true;
+    this.newPersonalData = {...this.personalData };
+    this.inputs = [];
+    for (let i = 0; i < this.newPersonalData.phoneNumber.length; i++) {
+      this.inputs.push({ value: this.newPersonalData.phoneNumber[i] });
+    }
+    this.displayModal = true;
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.form.controls;
+  }
+   //add another input for the phone number
+  addInput() {
+    if (this.inputs.length < this.maxInputs) {
+      this.inputs.push({ value: '' });
+    }
+  }   
+  //delete an input for the phone number
+  deleteInput(index: number) {
+    this.inputs.splice(index, 1);
+  }
+
+  createPersonalData() {
+    this.submitted = true;
+    if (this.form.invalid) {
+     // this.displayModal = true;
+      return;
+    }
+    const token = this.authService.getToken();
+    this.newPersonalData.phoneNumber = this.inputs.map(input => input.value);
+    this.personalDataService.createPersonalData(this.newPersonalData, token).subscribe((newData) => {
+      this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Personal Data added Succsessfuly', life: 3000 });
+      console.log(newData);
+      this.displayModal = false;
+      this.getPersonalDataByUserId()
+
+    });
+
+    
+
+  }
+
+  loadUserDataAndImage(): void {
+    const loggedInUserId = this.authService.getLoggedInUserId();
+    if (!loggedInUserId) {
+      console.error('No logged-in user found');
+      return;
+    }
+    this.imageService.loadImageByUserId(loggedInUserId).subscribe((data) => {
+      this.image = data;
+    },
+      (error) => {
+        console.error('Error loading image:', error);
+      });
+  }
+
+  getPersonalDataByUserId() {
+    this.isLoading = true;
+    const userId = this.authService.getLoggedInUserId();
+    if (!userId) {
+      console.error('No logged-in user found');
+      return;
+    }
+    this.personalDataService.getPersonalDataByUserId(userId).subscribe((data) => {
+      this.personalData = data;
+      this.isLoading = false;
+      if (this.personalData) {
+        this.numberOfPersonaldata = 1;
+      }
+    });
+  }
+
+  updatePersonalData() {
+    console.log("hani lenna")
+    this.submitted = true;
+    if (this.form.invalid) {
+      console.log(this.form.invalid)
+     // this.displayModal = true;
+      return;
+    }
+    console.log(this.form.invalid)
+    const userId = this.authService.getLoggedInUserId();
+    if (!userId) {
+      console.error('No logged-in user found');
+      return;
+    }
+
+    this.newPersonalData.phoneNumber = this.inputs.map(input => input.value);
+    this.personalDataService.updatePersonalDataByUserId(this.newPersonalData ,userId).subscribe((updatedData) => {
+      console.log(updatedData);
+      this.messageService.add({severity:'success', summary: 'Successful', detail:'Personal Data updated Successfully', life: 3000});
+      this.displayModal = false;
+      this.getPersonalDataByUserId() 
+    });
+  }
+
+
+  showModalDialog() {
+    this.isEditing = false;
+    this.displayModal = true;
+  }
+  showPositionDialog(position: string) {
+    this.position = position;
+    this.displayPosition = true;
+  }
+  closeModal() {
+    //this.newPersonalData= new PersonalDataDTO()
+    //  this.displayModal = false;
+    this.showPositionDialog('bottom');
+
+  }
+  closeButtomModal() {
+    this.displayPosition = false;
+    this.showPositionDialog('bottom');
+  }
+  closeAllModals() {
+  
+    this.displayModal = false
+    this.displayPosition = false;
+
+  }
+
+
+  //images upload delete and submit
+  onSubmit(): void {
+    // console.log('Token in Component:', this.authService.getToken());
+
+    if (this.selectedFile) {
+      this.imageService.addImage(this.selectedFile).subscribe(
+        (response) => {
+          console.log('Image uploaded successfully:', response);
+          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Image uploaded successfully', life: 3000 });
+        },
+        (error) => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error uploading image', life: 3000 });
+        }
+      );
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Waning', detail: 'No Image Selected', life: 3000 });
+    }
+  }
+
+
+  updateImageByUserId(): void {
+    if (!this.selectedFile) {
+      console.warn('No file selected');
+      return;
+    }
+    const loggedInUserId = this.authService.getLoggedInUserId();
+    if (!loggedInUserId) {
+      console.error('No logged-in user found');
+      return;
+    }
+    this.imageService.updateImageByUserId(loggedInUserId, this.selectedFile).subscribe((data) => {
+      this.image = data;
+      this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Image Updated Succsessfuly', life: 3000 });
+    });
+  }
+
+  onDeleteImage() {
+    const loggedInUserId = this.authService.getLoggedInUserId();
+    if (!loggedInUserId) {
+      console.error('No logged-in user found');
+      return;
+    }
+    this.imageService.deleteImageByUserId(loggedInUserId).subscribe(
+      (response) => {
+        //console.log('Image deleted successfully:', response);
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Image deleted successfully', life: 3000 });
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error Deleting  image', life: 3000 });
+      }
+    );
+  }
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    this.selectedFile = file;
+    this.imagePreview(file);
+  }
+
+  imagePreview(file: File): void {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.profilePic.nativeElement.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  onUploadButtonClick(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  keys(obj: object): string[] {
+    return Object.keys(obj);
+  }
+  
+  onSelectCountry(): void {
+    if (this.newPersonalData.Country !== 'Tunisia') {
+      this.newPersonalData.Region = '';
+      this.newPersonalData.City = '';
+    }
+  }
+
+
+  getCities(country: string, region: string): string[] {
+    const countryData = (this.countries as {[key: string]: any})[country];
+    return countryData?.[region]?.cities || [];
+  }
+
+}

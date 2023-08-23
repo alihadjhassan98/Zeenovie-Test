@@ -1,0 +1,76 @@
+<form [formGroup]="skillsForm" (ngSubmit)="onSubmit()">
+    <p-dialog class='custom-close-button' [(visible)]="displayModal" [modal]="true" [style]="{height :'30vw',width:'35vw'}"
+    [baseZIndex]="10000" [draggable]="true" [resizable]="true" [closable]="false">
+    <ng-template pTemplate="header">
+        <div class="p-dialog-title">Add Work Experience</div>
+    </ng-template>
+     
+    <div class="p-mb-5 mt-5">
+        <div class="grid mt-5">
+          <div class="container">
+            <div class="row">
+             <!-- <input name="id" hidden formControlName="_id" readonly>  -->
+      
+              <div class="col-md-12">
+                <label for="competence">Skill</label>
+                <input type="text" id="competence" formControlName="competence"/>
+                <div *ngIf="isFieldInvalid('competence')" class="p-error">
+                  <span>Skill is required.</span>
+                </div>
+              </div>
+      
+              <div class="col-md-12">
+                <label for="gender" class="required">Level</label>
+              </div>
+      
+              <div class="form-check flex align-items-center ml-5 col-md-3">
+                <input type="radio" class="form-check-input" id="Intermediate" name="level" formControlName="level" value="Intermediate">
+                <label for="Intermediate" class="form-check-label flex align-items-center">Intermediate</label>
+              </div>
+              <div class="form-check flex align-items-center ml-5 col-md-3">
+                <input type="radio" class="form-check-input" id="male" name="level" formControlName="level" value="Beginner">
+                <label for="male" class="form-check-label">Beginner</label>
+              </div>
+      
+              <div class="form-check flex align-items-center col-md-3">
+                <input type="radio" class="form-check-input" id="Advance" name="level" formControlName="level" value="Advance">
+                <label for="Advance" class="form-check-label">Advance</label>
+              </div>
+              <div class="form-check flex align-items-center ">
+                <input type="radio" class="form-check-input" id="fluent" name="level" formControlName="level" value="fluent">
+                <label for="fluent" class="form-check-label">Fluent</label>
+              </div>
+              <div *ngIf="isFieldInvalid('level')" class="p-error">
+                <span>Level is required.</span>
+              </div>
+      
+              <div class="col-md-12">
+                <label for="description">Description</label>
+                <textarea type="text" id="description" formControlName="description"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+   
+    
+        <ng-template pTemplate="footer">
+            <button pButton pRipple icon="pi pi-times" (click)="closeModal()" label="No"
+                class="p-button-outlined p-button-rounded p-button-danger blue-hover"></button>
+            <button type="submit" pButton pRipple icon="pi pi-check"
+             
+                label="Save" class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+        </ng-template>
+    </p-dialog>
+    <p-dialog header="Are you sure you want to close this window?" [(visible)]="displayPosition" [modal]="true"
+        [style]="{width: '20vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <p> Your changes will be lost if you leave without saving.</p>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple icon="pi pi-times" (click)="displayPosition=false" label="No"
+                class="p-button-outlined p-button-rounded p-button-danger blue-hover"></button>
+            <button pButton pRipple icon="pi pi-check" (click)="closeAllModals()" label="Yes"
+                class="p-button-outlined p-button-rounded p-button-secondary blue-hover"></button>
+        </ng-template>
+    </p-dialog>
+    </form>

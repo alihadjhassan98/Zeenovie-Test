@@ -1,0 +1,83 @@
+<div class="grid">
+    <div class="col-3 lg:col-6 xl:col-3">
+        <!-- Card 1 -->
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Number of consultant </span>
+                    <div class="text-900 font-medium text-xl">{{ SumConsultants }}</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
+                </div>
+            </div>
+         
+        </div>
+    </div>
+    <div class="col-3 lg:col-6 xl:col-3">
+        <!-- Card 2 -->
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Number of Entreprises</span>
+                    <div class="text-900 font-medium text-xl">{{ SumEntreprises}}</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-orange-100 border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-map-marker text-orange-500 text-xl"></i>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    <div class="col-3 lg:col-6 xl:col-3">
+        <!-- Card 3 -->
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Number of Job offres</span>
+                    <div class="text-900 font-medium text-xl">{{sumOfOffers}}</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-inbox text-cyan-500 text-xl"></i>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+    <div class="col-3 lg:col-6 xl:col-3">
+        <!-- Card 4 -->
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Number of Job applications</span>
+                    <div class="text-900 font-medium text-xl">{{SumOffreApplications}} </div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-comment text-purple-500 text-xl"></i>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</div>
+<div class="grid mt-4">
+    <div class="col-6 xl:col-6">
+        <div class="card">
+            <h5>Users Overview</h5>
+            <p-chart type="line" [data]="data" [options]="options"></p-chart>
+        </div>
+    </div>
+    <div class="col-6 xl:col-6">
+        <div class="card">
+            <h5>Offres Overview</h5>
+            <p-chart type="line" [data]="offersData" [options]="offersOptions"></p-chart>
+        </div>
+    </div>
+</div>
+
+
+<!--  <p-chart type="line" [data]="data" [options]="options"></p-chart>    </div>   -->

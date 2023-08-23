@@ -1,0 +1,18 @@
+
+<ng-container *ngIf="authService.isConnected()">
+<app-header-logged-in></app-header-logged-in>
+</ng-container>
+
+
+<ng-container *ngIf="!authService.isConnected()">
+<app-header-logged-out></app-header-logged-out>
+</ng-container>
+
+
+
+
+
+
+
+
+
